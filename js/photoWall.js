@@ -1,0 +1,13 @@
+var imageWidth,imgDataPath="/blog/photos/photos.json",imgPath="https://cdn.jsdelivr.net/gh/Cenergy/images/gallery/",imgMaxNum=50,windowWidth=window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth;imageWidth=windowWidth<768?145:250;const photo={page:1,offset:imgMaxNum,init:function(){var a=this;$.getJSON(imgDataPath,function(t){a.render(a.page,t),a.eventListen(t)})},constructHtml(t){var{imageWidth:t,imageX:a,imageY:i,name:e,imgPath:n,imgName:m,imgNameWithPattern:d}=t;return`<div class="card lozad" style="width:${t}px">
+                  <div class="ImageInCard" style="height:${t*i/a}px">
+                    <a data-fancybox="gallery" href="${n}${e}/${d}"
+                          data-caption="${m}" title="${m}">
+                            <img  class="lazyload" data-src="${n}${e}/${d}"
+                            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                            onload="lzld(this)"
+                            lazyload="auto">
+                        </a>
+                  </div>
+                </div>`},render:function(t,a=[]){if(!(this.data=a).length)return;var i,e,n,m,d="";let o="";var l="",[a={}]=(a.forEach((t,a)=>{a=0===a?"active":"";o+=`<li class="nav-item" role="presentation">
+          <a class="nav-link ${a} photo-tab" id="home-tab" photo-uuid="${t.name}" data-toggle="tab" href="#${t.name}"  role="tab" aria-controls="${t.name}" aria-selected="true">${t.name}</a>
+        </li>`}),a);const{children:s=[],name:r}=a;s.forEach((t,a)=>{i=t.split(" ")[1],e=i.split(".")[0],m=t.split(" ")[0],n=m.split(".")[0],m=m.split(".")[1];t={imageWidth:imageWidth,imageX:n,imageY:m,name:r,imgName:e,imgPath:imgPath,imgNameWithPattern:i};d+=this.constructHtml(t)}),l+=` <div class="tab-pane fade show active"  role="tabpanel" aria-labelledby="home-tab">${d}</div>`;a=`<ul class="nav nav-tabs" id="myTab" role="tablist">${o}</ul>`,l=`<div class="tab-content" id="myTabContent">${l}</div>`;$("#imageTab").append(a),$(".ImageGrid").append(l),this.minigrid()},eventListen:function(m){let d=this;var o,l,s,r;$('a[data-toggle="tab"]').on("shown.bs.tab",function(t){$(".ImageGrid").empty();const a=$(t.target).attr("photo-uuid");const{children:i,name:e}=m.find(t=>t.name===a)||{};let n="";i.forEach((t,a)=>{o=t.split(" ")[1],l=o.split(".")[0],r=t.split(" ")[0],s=r.split(".")[0],r=r.split(".")[1];t={imageWidth:imageWidth,imageX:s,imageY:r,name:e,imgName:l,imgPath:imgPath,imgNameWithPattern:o};n+=d.constructHtml(t)}),$(".ImageGrid").append(n),d.minigrid()})},minigrid:function(){var t=new Minigrid({container:".ImageGrid",item:".card",gutter:12});t.mount(),$(window).resize(function(){t.mount()})}};photo.init();
