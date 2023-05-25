@@ -51,6 +51,10 @@ a {
   text-decoration:none;
 }
 
+    section ul li {
+        font-size: 18px;
+    }
+
 a:hover {
   color:#069;
 }
