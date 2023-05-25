@@ -29,12 +29,23 @@
       <section>
         <p>I’m a 1st-year MS student advised by <a href="https://scholar.nycu.edu.tw/zh/persons/hsuan-cheng-huang">Prof Hsuan-Cheng Huang</a> in the Institute of Biomedical Informatics at NYCU.
         </p>
-        <p>Today, with the explosion of data, more and more people are in desperate need to access and make use of data in more and more fields, such as social science and healthcare. However, both domain-specific and programming skills are required for an individual to do so, but not everyone has the background. Inspired by such use cases, my current research focuses on developing methods to help users interact with and make sense of data using machine learning and programming language techniques.
+        <p>The tumor microenvironment is a complex and heterogeneous system, made up of cancer cells, immune cells, fibroblasts, blood vessels, and the extracellular matrix. The behavior of a tumor and its response to treatment are heavily influenced by this microenvironment, making it a crucial area of study.
         </p>
         <h2>On-Going Projects</h2>
-        <h3>Automatic Standardization for Data Preprocessing</h3>
-        <p>Data preparation has been seen as “janitor work” yet essential in data-to-insight pipelines. The increasing liberality of data is followed by an explosion in the diversity of data consumers. However, the required technical and domain expertise prevents many from performing extensive data preparation. Further, many seem to be stuck in a vicious cycle of writing one-off programs to process data. Recently, automating data preparation programs has been shown to improve many aspects of the pipeline, including data quality, research reproducibility, and user productivity. We propose a novel approach to automatically improve data preparation programs in Python and Julia.
+        <h3>Machine Learning for scRNA-seq Analysis in Tumors</h3>
+        <p>
+        In our project, we're harnessing the power of machine learning to dissect the complexity of scRNA-seq data generated from the tumor microenvironment. scRNA-seq offers us single-cell resolution, providing an in-depth view of cellular variability. The data's high dimensionality is a challenge, but this is where machine learning truly shines. It allows us to manage these complex data sets effectively, finding significant patterns within the data that are beyond human manual analysis capacity. The key role of machine learning is to turn this wealth of data into meaningful insights that can ultimately contribute to our understanding of tumor behavior.
         </p>
+        <p>Our project involves several key steps:</p>
+        <ul>
+            <li>Data Generation: We produce scRNA-seq data from tumor samples, which gives us the gene expression at the single-cell level.</li>
+            <li>Data Preprocessing: We preprocess raw scRNA-seq data, applying quality control, normalization, and feature selection to ensure the validity of our subsequent analysis.</li>
+            <li>Dimensionality Reduction: We implement machine learning techniques like PCA, t-SNE or UMAP to reduce the data's dimensionality, thus simplifying the complexity while preserving vital information that distinguishes different cell types.</li>
+            <li>Clustering: Using machine learning, we group similar cells based on their gene expression profiles, helping to identify diverse cell types within the tumor microenvironment.</li>
+            <li>Differential Expression Analysis: Machine learning helps identify genes that show varying levels of expression in different cell types, which can lead to potential biomarkers or therapeutic targets.</li>
+            <li>Cell-Cell Communication Analysis: We use machine learning algorithms to predict potential interactions between different cell types based on the ligands and receptors they express.</li>
+        </ul>
+        <p>We hope the research will contribute to a better understanding of the complex interactions within the tumor microenvironment and, ultimately, to the development of more effective cancer treatments.</p>
         <h2>Others</h2>
         <a href="https://yushengnotes.com/?fbclid=IwAR253xAegudGyW5HdzYYHR4lTyApLenUR5RuArRBp0a6HxQLJxX6-rz6xwI"><p>My old website</p></a>
         <a href="./resources/index.html"><p>Resources</p></a>
