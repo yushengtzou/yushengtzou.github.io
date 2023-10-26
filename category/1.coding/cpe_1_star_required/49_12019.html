@@ -34,26 +34,19 @@
       </header>
 
       <section>
-        <h1>10242 - Fourth Point !!</h1>
+        <h1>12019 - Doom's Day Algorithm</h1>
         <br>
-        <i>2023/10/21</i>
+        <i>2023/10/26</i>
         <br>
         <br>
-        <strong><p>題目敘述</strong>：<a href="https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=1183">here</a></p>
+        <strong><p>題目敘述</strong>：<a href="https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=3170">here</a></p>
             
         <p><strong>解題想法</strong>：</p>
         <ul style="margin-left: 0; padding-left: 1em;">
-          <li>題目給定平行四邊形的「兩個相鄰邊」的端點的 (x, y)座標，這四個端點中必有兩個座標是同一點。
-          </li>
+          <li>題目給定每個月份各一個日期稱其為 Doom's Day，皆設定其為星期一，找出輸入的月份其對應的月份的 Doom's Day 的日期。 </li>
           <br>
-          <li>決定三個相異的座標點後，即可決定第四點的座標。</li>
+          <li>算出輸入日期和 Doom's Day 日期的差對7取餘數，即可決定輸入日期是星期幾。</li>
         </ul>
-        <br>
-        <hr>
-        <br>
-        <p><strong>流程圖</strong>：</p>
-        <img src="../../../images/cpe_1_star/10242.png" alt="">
-        <br>
         <br>
         <hr>
         <br>
@@ -63,40 +56,72 @@
     
         <pre>
           <code>
-#  鄒雨笙 UVa Online Judge 2023/10/21
+//  鄒雨笙 UVa Online Judge 2023/10/26
+//
+//  Problem 12019 - Doom's Day Algorithm
 
-#  Problem 10242 - Fourth Point !!
+
+#include&lt;iostream&gt;
+#include&lt;map&gt;
+using namespace std;
 
 
-while True:
-    try:
-        points = input().split()
-        
-        if len(points) != 8:
-            continue
+int main() {
+    int T, M, D;
+    int numOfWeekDay;
+    int day;
 
-        points = [float(x) for x in points]
+    // non-leap year
+    // 1/10, 2/21, 3/7, 4/4, 5/9, 6/6, 
+    // 7/11, 8/8, 9/5, 10/10, 11/7, 12/12(一)
+    map&lt;int, int&gt; nonLeapDays = {
+        {1, 10},
+        {2, 21},
+        {3, 7},
+        {4, 4},
+        {5, 9},
+        {6, 6},
+        {7, 11},
+        {8, 8},
+        {9, 5},
+        {10, 10},
+        {11, 7},
+        {12, 12}
+    };
+    map&lt;int, string&gt; weekDay = {
+        {0, "Monday"},
+        {1, "Tuesday"},
+        {2, "Wednesday"},
+        {3, "Thursday"},
+        {4, "Friday"},
+        {5, "Saturday"},
+        {6, "Sunday"},
+    };
 
-        x1, y1, x2, y2, x3, y3, x4, y4 = points
+    cin >> T;
+    while (T--) {
+        cin >> M >> D;
 
-        if x1 == x3 and y1 == y3:
-            x1, y1, x2, y2, x3, y3 = x2, y2, x3, y3, x4, y4
-        elif x1 == x4 and y1 == y4:
-            x1, y1, x2, y2 = x2, y2, x4, y4
-        elif x2 == x3 and y2 == y3:
-            x2, y2, x3, y3 = x3, y3, x4, y4
-        elif x2 == x4 and y2 == y4:
-            x2, y2 = x4, y4
+        for (const auto& doomDay : nonLeapDays) {
+            if (M == doomDay.first) {
+                if (D - doomDay.second >= 0) {
+                    numOfWeekDay = (D - doomDay.second) % 7;
+                    cout << weekDay[numOfWeekDay] << endl;
+                }
+                else {
+                    if (abs(D - doomDay.second) % 7 != 0) {
+                        numOfWeekDay = 7 - (abs(D - doomDay.second) % 7);
+                    }
+                    else {
+                        numOfWeekDay = abs(D - doomDay.second) % 7;
+                    }
+                    cout << weekDay[numOfWeekDay] << endl;
+                }
+            }
+        }
+    }
 
-        vector = (x1 - x2, y1 - y2)
-        point4 = (x3 + vector[0], y3 + vector[1])
-
-        print(f"{point4[0]:.3f} {point4[1]:.3f}")
-
-    except EOFError:
-        break
-    except ValueError:
-        continue
+}
           </code>
         </pre>
 
