@@ -10,6 +10,13 @@
     <link rel="stylesheet" href="../../../stylesheets/pygment_trac.css">
     <meta name="viewport" content="width=device-width">
     <script src="https://kit.fontawesome.com/15acf50b31.js" crossorigin="anonymous"></script>
+    <style>
+        hr {
+            width: 66%; /* Adjust to the desired width */
+            border: none;
+            margin: 0 auto; /* Center the line */
+        }
+    </style>
   </head>
   <body>
     <div class="wrapper">
@@ -27,55 +34,68 @@
       </header>
 
       <section>
-        <h1>CPE 1 star: 必考49題</h1>
+        <h1>11332 - Summing Digits</h1>
         <br>
-        <strong><p><a href="./37_10908.html" style="color: black; font-size: 19px;">10908 - Largest Square</a></p></strong>
-        <i>2023/11/10</i>
-        <br>
-        <br>
-        <br>
-        <strong><p><a href="./45_11332.html" style="color: black; font-size: 19px;">11332 - Summing Digits</a></p></strong>
         <i>2023/11/8</i>
         <br>
         <br>
+        <strong><p>題目敘述</strong>：<a href="https://onlinejudge.org/index.php?option=onlinejudge&Itemid=8&category=25&page=show_problem&problem=2307">here</a></p>
+            
+        <p><strong>解題想法</strong>：</p>
+        <ul style="margin-left: 0; padding-left: 1.5em;">
+          <li>將字串中的每一個字元轉換成整數型態後做加總。</li>
+          <br>
+        </ul>
         <br>
-        <strong><p><a href="./20_10170.html" style="color: black; font-size: 19px;">10170 - The Hotel with Infinite Rooms</a></p></strong>
-        <i>2023/11/5</i>
+        <hr>
         <br>
-        <br>
-        <br>
-        <strong><p><a href="./31_10409.html" style="color: black; font-size: 19px;">10409 - Die Game</a></p></strong>
-        <i>2023/11/4</i>
-        <br>
-        <br>
-        <br>
-        <strong><p><a href="./32_10415.html" style="color: black; font-size: 19px;">10415 - Eb Alto Saxophone Player</a></p></strong>
-        <i>2023/10/30</i>
-        <br>
-        <br>
-        <br>
-        <strong><p><a href="./34_10642.html" style="color: black; font-size: 19px;">10642 - Can You Solve It?</a></p></strong>
-        <i>2023/10/28</i>
-        <br>
-        <br>
-        <br>
-        <strong><p><a href="./24_10071.html" style="color: black; font-size: 19px;">10071 - Back to High School Physics</a></p></strong>
-        <i>2023/10/28</i>
-        <br>
-        <br>
-        <br>
-        <strong><p><a href="./49_12019.html" style="color: black; font-size: 19px;">12019 - Doom's Day Algorithm</a></p></strong>
-        <i>2023/10/26</i>
-        <br>
-        <br>
-        <br>
-        <strong><p><a href="./28_10242.html" style="color: black; font-size: 19px;">10242 - Fourth Point !!</a></p></strong>
-        <i>2023/10/21</i>
-        <br>
-        <br>
-      </section>
         <br>
 
+        
+    <p><strong>程式碼</strong>：</p>
+    
+        <pre>
+          <code>
+//  鄒雨笙 UVa Online Judge 2023/11/8
+//
+//  Problem 11332 - Summing Digits
+
+
+#include&lt;iostream&gt;
+#include&lt;string&gt;
+using namespace std;
+
+
+int main() {
+    bool flag = true;
+    string n;
+
+    while (flag) {
+        cin >> n;
+        if (n == "0") {
+            break;
+        }
+        while (n.size() > 1) {
+            int sum = 0;
+            for (auto letter : n) {
+                sum += letter - '0';
+            }
+            n = to_string(sum);
+        }
+
+        cout << n << endl;
+
+
+    }
+
+}
+
+          </code>
+        </pre>
+
+        <br>
+
+      </section>
       <footer style="text-align: center;">
         <p style="font-size: 14px;">&copy; 2023 Yu Sheng Tzou</p>
       </footer>
