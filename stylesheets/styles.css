@@ -192,6 +192,14 @@ section {
   padding-bottom:50px;
 }
 
+mainCanvas {
+  width: 500px;
+  height: 500px;
+  float: right;
+  padding-top: 0px;
+  padding-bottom: 50px;
+}
+
 small {
   font-size:11px;
 }
