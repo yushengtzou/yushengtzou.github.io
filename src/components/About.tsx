@@ -1,9 +1,9 @@
 const About = () => {
   const skills = [
     { category: 'Programming', items: ['Java', 'Spring Boot', 'Python', 'JavaScript', 'TypeScript', 'C++', 'CUDA'] },
-    { category: 'AI/ML', items: ['Computer Vision', 'Deep Learning', 'CUDA Python', 'Algorithm Development', '3D Reconstruction'] },
-    { category: 'Web Development', items: ['React', 'Three.js', 'Node.js', 'Full-Stack Development', 'Performance Optimization'] },
+    { category: 'AI/ML', items: ['Computer Vision', 'Deep Learning', 'PyTorch', 'Algorithm Development', '3D Reconstruction'] },
     { category: 'Hardware/IoT', items: ['ESP32 Microcontrollers', 'Simulink', 'Motor Control', 'IoT Systems', 'Multi-view Imaging'] },
+    { category: 'Web Development', items: ['React', 'Three.js', 'Node.js', 'Full-Stack Development', 'Performance Optimization'] },
   ]
 
   const education = [
@@ -14,7 +14,8 @@ const About = () => {
       period: '2023 - 2025',
       advisor: 'Prof. Chiou-Shann Fuh',
       lab: 'Digital Camera and Computer Vision Laboratory',
-      icon: '🎓',
+      icon: '/images/ntu-logo.png', // Add the logo to your public/images folder
+      isImage: true,
     },
   ]
 
@@ -70,8 +71,16 @@ const About = () => {
               {education.map((edu, index) => (
                 <div key={index} className="bg-gray-50 rounded-xl p-6 border border-gray-100">
                   <div className="flex items-start">
-                    <div className="p-3 bg-primary-100 rounded-lg mr-4">
-                      <span className="text-2xl">{edu.icon}</span>
+                    <div className={`p-3 rounded-lg mr-4 ${edu.isImage ? '' : 'bg-primary-100'}`}>
+                      {edu.isImage ? (
+                        <img 
+                          src={edu.icon} 
+                          alt="Institution logo" 
+                          className="w-14 h-14 object-contain"
+                        />
+                      ) : (
+                        <span className="text-2xl">{edu.icon}</span>
+                      )}
                     </div>
                     <div className="flex-1">
                       <h4 className="text-xl font-semibold text-gray-900">{edu.degree}</h4>
@@ -131,7 +140,6 @@ const About = () => {
         {/* Technical Skills */}
         <div className="animate-on-scroll mt-16">
           <h3 className="text-2xl font-bold mb-8 text-center flex items-center justify-center">
-            <span className="text-2xl mr-3">💻</span>
             Technical Skills
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
