@@ -54,8 +54,7 @@ const About = () => {
               </p>
               <p>
                 My expertise bridges multiple domains: from Java Spring Boot backends orchestrating Python AI modules, 
-                to ESP32 microcontroller programming for IoT systems, and advanced GPU acceleration with CUDA. 
-                I believe in treating every day as a learning day and constantly strive for excellence.
+                to ESP32 microcontroller programming for IoT systems.
               </p>
             </div>
           </div>
