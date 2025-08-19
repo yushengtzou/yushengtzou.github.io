@@ -47,7 +47,7 @@ const About = () => {
                 the entire technology stack, from hardware design to full-stack web applications.
               </p>
               <p>
-                As the Lead Developer & System Architect for the 3D BeautyAI system, I spearhead 
+                As the Lead Developer for the 3D BeautyAI system, I spearhead 
                 end-to-end development of novel systems for 3D facial aesthetic analysis. This includes architecting 
                 foundational algorithms, developing IoT imaging systems, and delivering high-performance web platforms 
                 with React/Three.js achieving smooth 60 FPS manipulation of large-scale 3D models.
