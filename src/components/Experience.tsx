@@ -7,7 +7,7 @@ const Experience = () => {
         {
           title: 'Software Engineer, AI Innovation Team',
           period: '2025.6 - Present',
-          description: '3D BeautyAI system | Lead Developer & System Architect',
+          description: '3D BeautyAI system | Lead Developer',
           achievements: [
             'Spearheaded the complete, end-to-end development of a novel system for 3D facial aesthetic analysis, encompassing hardware design, core algorithm architecture, and a full-stack web application.',
             'Architected the foundational system for the 3D face reconstruction algorithm, defining data flows, task partitioning, and system interoperability.',
