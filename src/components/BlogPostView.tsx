@@ -47,8 +47,8 @@ const BlogPostView = ({ post, onBack }: BlogPostViewProps) => {
       .replace(/^## (.*$)/gim, '<h2 class="text-2xl font-bold mt-8 mb-4">$1</h2>')
       .replace(/^# (.*$)/gim, '<h1 class="text-3xl font-bold mt-8 mb-4">$1</h1>')
       // Lists
-      .replace(/^\* (.+)$/gim, '<li class="ml-6 mb-2">• $1</li>')
-      .replace(/^\d+\. (.+)$/gim, '<li class="ml-6 mb-2">$1</li>')
+      .replace(/^\* (.+)$/gim, '<li class="ml-6 mb-3 leading-loose">• $1</li>')
+      .replace(/^\d+\. (.+)$/gim, '<li class="ml-6 mb-3 leading-loose">$1</li>')
       // Bold and italic
       .replace(/\*\*\*(.+?)\*\*\*/g, '<strong class="font-bold italic">$1</strong>')
       .replace(/\*\*(.+?)\*\*/g, '<strong class="font-bold">$1</strong>')
@@ -66,14 +66,14 @@ const BlogPostView = ({ post, onBack }: BlogPostViewProps) => {
       // Inline code
       .replace(/`([^`]+)`/g, '<code class="bg-gray-100 px-1.5 py-0.5 rounded text-sm font-mono">$1</code>')
       // Line breaks
-      .replace(/\r\n\r\n/g, '</p><p class="mb-4 text-gray-700 leading-relaxed">')
-      .replace(/\n\n/g, '</p><p class="mb-4 text-gray-700 leading-relaxed">')
+      .replace(/\r\n\r\n/g, '</p><p class="mb-4 text-gray-700 leading-loose">')
+      .replace(/\n\n/g, '</p><p class="mb-4 text-gray-700 leading-loose">')
     
     // Wrap in paragraph tags
-    html = '<p class="mb-4 text-gray-700 leading-relaxed">' + html + '</p>'
+    html = '<p class="mb-4 text-gray-700 leading-loose">' + html + '</p>'
     
     // Wrap lists
-    html = html.replace(/(<li class="ml-6 mb-2">.*<\/li>\s*)+/g, '<ul class="my-4">$&</ul>')
+    html = html.replace(/(<li class="ml-6 mb-3 leading-loose">.*<\/li>\s*)+/g, '<ul class="my-6 space-y-2">$&</ul>')
     
     return html
   }

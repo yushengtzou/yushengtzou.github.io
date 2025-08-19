@@ -118,7 +118,7 @@ const BlogPost = ({ post, onBack }: BlogPostProps) => {
                     </h3>
                   ),
                   p: ({ children }) => (
-                    <p className="text-gray-700 leading-relaxed mb-6 text-lg">
+                    <p className="text-gray-700 leading-loose mb-6 text-lg">
                       {children}
                     </p>
                   ),
@@ -153,17 +153,17 @@ const BlogPost = ({ post, onBack }: BlogPostProps) => {
                     </pre>
                   ),
                   ul: ({ children }) => (
-                    <ul className="list-disc list-inside space-y-3 my-6 text-gray-700 text-lg">
+                    <ul className="list-disc list-inside space-y-4 my-6 text-gray-700 text-lg">
                       {children}
                     </ul>
                   ),
                   ol: ({ children }) => (
-                    <ol className="list-decimal list-inside space-y-3 my-6 text-gray-700 text-lg">
+                    <ol className="list-decimal list-inside space-y-4 my-6 text-gray-700 text-lg">
                       {children}
                     </ol>
                   ),
                   li: ({ children }) => (
-                    <li className="leading-relaxed">
+                    <li className="leading-loose">
                       {children}
                     </li>
                   ),

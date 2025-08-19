@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import postsMetadata from '../content/posts.json'
 
 interface BlogPostType {
   id: number
@@ -11,6 +12,7 @@ interface BlogPostType {
   readTime: string
   published: boolean
   author: string
+  filename?: string
   image?: string
 }
 
@@ -24,82 +26,8 @@ const Blog = ({ onViewPost }: BlogProps) => {
   const [isLoading, setIsLoading] = useState(true)
 
   // Fallback static data (same as before)
-  const staticBlogPosts = [
-    {
-      id: 1,
-      title: '難與不難',
-      slug: 'difficulty-and-ease',
-      excerpt: 'Reflections on the nature of difficulty and challenge in research and life.',
-      content: '',
-      date: '2024-11-02T12:00:00Z',
-      category: 'Philosophy',
-      readTime: '3 min read',
-      published: true,
-      author: 'Yu-Sheng Tzou'
-    },
-    {
-      id: 2,
-      title: '選擇公司的指標',
-      slug: 'company-selection-criteria',
-      excerpt: 'Key indicators and considerations when choosing a company to work for.',
-      content: '',
-      date: '2024-11-02T08:00:00Z',
-      category: 'Career',
-      readTime: '5 min read',
-      published: true,
-      author: 'Yu-Sheng Tzou'
-    },
-    {
-      id: 3,
-      title: 'The Essence of the "Activity" of Programming',
-      slug: 'essence-of-programming-activity',
-      excerpt: 'Exploring the fundamental nature of programming as an intellectual activity.',
-      content: '',
-      date: '2024-10-06T12:00:00Z',
-      category: 'Programming',
-      readTime: '7 min read',
-      published: true,
-      author: 'Yu-Sheng Tzou'
-    },
-    {
-      id: 4,
-      title: '人生的追求',
-      slug: 'life-pursuits',
-      excerpt: 'Personal reflections on life pursuits and meaningful goals.',
-      content: '',
-      date: '2024-10-06T08:00:00Z',
-      category: 'Philosophy',
-      readTime: '4 min read',
-      published: true,
-      author: 'Yu-Sheng Tzou'
-    },
-    {
-      id: 5,
-      title: '溫暖的小角落',
-      slug: 'warm-corner',
-      excerpt: 'Finding comfort and warmth in life\'s small moments and spaces.',
-      content: '',
-      date: '2024-10-05T20:00:00Z',
-      category: 'Life',
-      readTime: '3 min read',
-      published: true,
-      author: 'Yu-Sheng Tzou'
-    },
-    {
-      id: 6,
-      title: '解決困難的問題',
-      slug: 'solving-difficult-problems',
-      excerpt: 'Strategies and approaches for tackling challenging problems.',
-      content: '',
-      date: '2024-10-02T20:00:00Z',
-      category: 'Problem Solving',
-      readTime: '6 min read',
-      published: true,
-      author: 'Yu-Sheng Tzou'
-    },
-  ]
 
-  const categories = ['All', 'Philosophy', 'Programming', 'Career', 'Life', 'Problem Solving', 'Research', 'AI/ML']
+  const categories = ['All', 'Signal Processing', 'Computer Vision', 'Operating Systems', 'Research', 'AI/ML']
 
   useEffect(() => {
     fetchBlogPosts()
@@ -128,18 +56,13 @@ const Blog = ({ onViewPost }: BlogProps) => {
 
   const fetchBlogPosts = async () => {
     try {
-      const baseUrl = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3001'
-      const response = await fetch(`${baseUrl}/api/posts`)
-      if (response.ok) {
-        const data = await response.json()
-        setBlogPosts(data)
-        console.log('✅ Successfully loaded blog posts from API:', data.length)
-      } else {
-        throw new Error('API request failed')
-      }
+      // Use local posts metadata
+      const data = postsMetadata as BlogPostType[]
+      setBlogPosts(data)
+      console.log('✅ Successfully loaded blog posts from local metadata:', data.length)
     } catch (error) {
-      console.log('⚠️ Failed to load from API, using static data:', error)
-      setBlogPosts(staticBlogPosts)
+      console.log('⚠️ Failed to load from local metadata:', error)
+      setBlogPosts([])
     } finally {
       setIsLoading(false)
     }
@@ -154,22 +77,26 @@ const Blog = ({ onViewPost }: BlogProps) => {
     return isNaN(date.getTime()) ? dateString : date.toLocaleDateString()
   }
 
-  const handlePostClick = (post: BlogPostType) => {
-    // For static posts with existing HTML pages, navigate to them
-    const staticLinkMap: { [key: string]: string } = {
-      '難與不難': 'category/3.blog/110224af.html',
-      '選擇公司的指標': 'category/3.blog/110224.html',
-      'The Essence of the "Activity" of Programming': 'category/3.blog/100624af.html',
-      '人生的追求': 'category/3.blog/100624.html',
-      '溫暖的小角落': 'category/3.blog/100524.html',
-      '解決困難的問題': 'category/3.blog/100224.html',
-    }
-    
-    if (staticLinkMap[post.title]) {
-      // Navigate to the existing HTML page
-      window.location.href = staticLinkMap[post.title]
+  const handlePostClick = async (post: BlogPostType) => {
+    if (onViewPost && post.filename) {
+      try {
+        // Load the markdown content dynamically from public directory
+        const response = await fetch(`/content/posts/${post.filename}`)
+        if (response.ok) {
+          const content = await response.text()
+          // Remove frontmatter (content between --- lines)
+          const contentWithoutFrontmatter = content.replace(/^---[\s\S]*?---\s*/, '')
+          const postWithContent = { ...post, content: contentWithoutFrontmatter }
+          onViewPost(postWithContent)
+        } else {
+          console.error('Failed to load post content')
+          onViewPost(post) // Show without content
+        }
+      } catch (error) {
+        console.error('Error loading post content:', error)
+        onViewPost(post) // Show without content
+      }
     } else if (onViewPost) {
-      // Use the full page view for API posts
       onViewPost(post)
     }
   }
@@ -197,12 +124,6 @@ const Blog = ({ onViewPost }: BlogProps) => {
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Sharing insights on technology, research, philosophy, and the journey of learning and discovery.
           </p>
-          {blogPosts.length > staticBlogPosts.length && (
-            <div className="mt-4 inline-flex items-center px-3 py-1 bg-green-100 text-green-700 text-sm rounded-full">
-              <span className="mr-2">✅</span>
-              Connected to live blog API
-            </div>
-          )}
         </div>
 
         {/* Category Filter */}
