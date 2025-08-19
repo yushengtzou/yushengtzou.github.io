@@ -18,21 +18,7 @@ const About = () => {
     },
   ]
 
-  const certifications = [
-    {
-      title: 'GPU Acceleration with the C++ Standard Library',
-      icon: '🏆',
-    },
-    {
-      title: 'Fundamentals of Accelerated Computing with CUDA Python',
-      icon: '🏆',
-    },
-  ]
 
-  const languages = [
-    { language: 'English', level: 'Full Professional' },
-    { language: 'Mandarin', level: 'Native or Bilingual' },
-  ]
 
   return (
     <section id="about" className="section-padding bg-white">
