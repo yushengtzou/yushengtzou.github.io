@@ -3,7 +3,7 @@ const Projects = () => {
     {
       title: 'LLM-Aided 3D Face Sculpting',
       description: 'Revolutionary system combining Large Language Models with 3D computer vision for medical applications.',
-      image: 'images/tsne_plot.png',
+      image: '/images/tsne_plot.png',
       technologies: ['Python', 'PyTorch', 'Three.js', 'OpenGL', 'NLP'],
       status: 'In Development',
       year: '2024',
@@ -16,7 +16,7 @@ const Projects = () => {
     {
       title: 'Computer Vision Portfolio',
       description: 'Collection of computer vision projects and experiments in deep learning and image processing.',
-      image: 'images/logo1.jpg',
+      image: '/images/logo1.jpg',
       technologies: ['OpenCV', 'TensorFlow', 'Python', 'CUDA'],
       status: 'Ongoing',
       year: '2023-2024',
@@ -28,7 +28,7 @@ const Projects = () => {
     {
       title: 'Interactive 3D Visualizations',
       description: 'Web-based 3D visualizations and shader experiments using modern web technologies.',
-      image: 'images/061823_2.jpg',
+      image: '/images/061823_2.jpg',
       technologies: ['Three.js', 'WebGL', 'JavaScript', 'GLSL'],
       status: 'Completed',
       year: '2023',

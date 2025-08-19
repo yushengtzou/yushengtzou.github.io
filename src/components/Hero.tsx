@@ -1,6 +1,6 @@
 import { HiMail } from 'react-icons/hi'
 import { FaGithub, FaLinkedin } from 'react-icons/fa'
-import logo from '/images/logo.jpg'
+// Logo will be served from public directory
 
 const Hero = () => {
   const socialLinks = [
@@ -27,7 +27,7 @@ const Hero = () => {
           <div className="mb-8 flex justify-center">
             <div className="relative">
               <img
-                src={logo}
+                src="/images/logo.jpg"
                 alt="Yu-Sheng Tzou"
                 className="w-32 h-32 rounded-full shadow-2xl border-4 border-white object-cover"
               />
