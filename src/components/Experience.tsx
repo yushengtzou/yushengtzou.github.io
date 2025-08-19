@@ -32,7 +32,8 @@ const Experience = () => {
           type: 'previous'
         }
       ],
-      logo: '🏢',
+      logo: '/images/A-TOP.png',
+      isImage: true,
       totalDuration: '1年5個月'
     }
   ]
@@ -57,8 +58,16 @@ const Experience = () => {
               <div className="p-8 lg:p-12">
                 {/* Company Header */}
                 <div className="flex items-start mb-8">
-                  <div className="p-4 bg-primary-100 rounded-xl mr-6">
-                    <span className="text-3xl">{exp.logo}</span>
+                  <div className={`p-4 rounded-xl mr-6 ${exp.isImage ? '' : 'bg-primary-100'}`}>
+                    {exp.isImage ? (
+                      <img 
+                        src={exp.logo} 
+                        alt="Company logo" 
+                        className="w-12 h-12 object-contain"
+                      />
+                    ) : (
+                      <span className="text-3xl">{exp.logo}</span>
+                    )}
                   </div>
                   <div className="flex-1">
                     <h3 className="text-2xl font-bold text-gray-900 mb-2">{exp.company}</h3>
