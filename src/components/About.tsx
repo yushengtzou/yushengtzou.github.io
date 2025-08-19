@@ -107,7 +107,7 @@ const About = () => {
             </div>
 
             {/* Certifications */}
-            <div className="animate-on-scroll">
+            {/* <div className="animate-on-scroll">
               <h3 className="text-2xl font-bold mb-6 flex items-center">
                 <span className="text-2xl mr-3">🏆</span>
                 Certifications
@@ -120,10 +120,10 @@ const About = () => {
                   </div>
                 ))}
               </div>
-            </div>
+            </div> */}
 
             {/* Languages */}
-            <div className="animate-on-scroll">
+            {/* <div className="animate-on-scroll">
               <h3 className="text-2xl font-bold mb-6 flex items-center">
                 <span className="text-2xl mr-3">🌍</span>
                 Languages
@@ -138,7 +138,7 @@ const About = () => {
                   </div>
                 ))}
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
 
