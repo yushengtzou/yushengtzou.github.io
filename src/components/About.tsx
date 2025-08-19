@@ -1,9 +1,9 @@
 const About = () => {
   const skills = [
-    { category: 'Programming', items: ['Java', 'Spring Boot', 'Python', 'JavaScript', 'TypeScript', 'C++', 'CUDA'] },
+    { category: 'Programming', items: ['C/C++', 'Python', 'JavaScript', 'TypeScript', 'Java'] },
     { category: 'AI/ML', items: ['Computer Vision', 'Deep Learning', 'PyTorch', 'Algorithm Development', '3D Reconstruction'] },
     { category: 'Hardware/IoT', items: ['ESP32 Microcontrollers', 'Simulink', 'Motor Control', 'IoT Systems', 'Multi-view Imaging'] },
-    { category: 'Web Development', items: ['React', 'Three.js', 'Node.js', 'Full-Stack Development', 'Performance Optimization'] },
+    { category: 'Web Development', items: ['React', 'Three.js', 'Node.js', 'Full-Stack Development', 'Spring Boot', 'Performance Optimization'] },
   ]
 
   const education = [
