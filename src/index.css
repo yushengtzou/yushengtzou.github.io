@@ -1,5 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import 'prismjs/themes/prism-tomorrow.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,67 +10,111 @@
   html {
     scroll-behavior: smooth;
   }
-  
+
   body {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     line-height: 1.6;
-    color: #1f2937;
-    background: #fafafa;
   }
-  
-  * {
-    box-sizing: border-box;
+
+  code, pre {
+    font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
   }
 }
 
 @layer components {
-  .gradient-text {
-    @apply bg-gradient-to-r from-primary-600 to-blue-600 bg-clip-text text-transparent;
-  }
-  
-  .card-hover {
-    @apply transform transition-all duration-300 hover:scale-105 hover:shadow-xl;
-  }
-  
-  .glass-effect {
-    @apply backdrop-blur-sm bg-white/80 border border-white/20;
-  }
-  
-  .section-padding {
-    @apply py-16 lg:py-24;
-  }
-  
   .container-padding {
     @apply px-4 sm:px-6 lg:px-8;
   }
-}
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
+  .section-padding {
+    @apply py-16 lg:py-24;
+  }
 
-::-webkit-scrollbar-track {
-  background: #f1f5f9;
-}
+  .gradient-text {
+    @apply bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent;
+  }
 
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 4px;
-}
+  .card-hover {
+    @apply transform transition-all duration-300 hover:scale-105 hover:shadow-xl;
+  }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
-}
+  .glass-effect {
+    @apply bg-white/90 backdrop-blur-md;
+  }
 
-/* Smooth animations */
-.animate-on-scroll {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.6s ease-out;
-}
+  /* Animation utilities */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+  }
 
-.animate-on-scroll.visible {
-  opacity: 1;
-  transform: translateY(0);
+  .animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  /* KaTeX Math Equations Styling */
+  .katex {
+    font-size: 1.1em !important;
+    color: #1f2937 !important;
+  }
+
+  .katex-display {
+    margin: 1.5rem 0 !important;
+    padding: 1rem !important;
+    background-color: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 0.5rem !important;
+    overflow-x: auto !important;
+  }
+
+  .katex-display .katex {
+    text-align: center !important;
+    font-size: 1.2em !important;
+  }
+
+  /* Inline math styling */
+  .katex:not(.katex-display) {
+    background-color: #f1f5f9 !important;
+    padding: 0.2rem 0.4rem !important;
+    border-radius: 0.25rem !important;
+    border: 1px solid #e2e8f0 !important;
+  }
+
+  /* Math block improvements */
+  .math-display {
+    text-align: center;
+    margin: 1.5rem 0;
+  }
+
+  /* Responsive math equations */
+  @media (max-width: 640px) {
+    .katex-display {
+      font-size: 0.9em !important;
+      padding: 0.75rem !important;
+    }
+    
+    .katex-display .katex {
+      font-size: 1em !important;
+    }
+  }
 } 

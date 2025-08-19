@@ -1,19 +1,22 @@
+import { HiMail, HiLocationMarker } from 'react-icons/hi'
+import { FaGithub, FaLinkedin, FaTwitter, FaInstagram } from 'react-icons/fa'
+
 const Contact = () => {
   const contactInfo = [
     {
-      icon: '✉️',
+      icon: HiMail,
       label: 'Email',
       value: 'daniel.tzou1021@gmail.com',
       href: 'mailto:daniel.tzou1021@gmail.com',
     },
     {
-      icon: '💼',
+      icon: FaLinkedin,
       label: 'LinkedIn',
       value: 'www.linkedin.com/in/yushengtzou',
       href: 'https://www.linkedin.com/in/yushengtzou',
     },
     {
-      icon: '📍',
+      icon: HiLocationMarker,
       label: 'Location',
       value: 'Taipei, Taiwan',
       href: '#',
@@ -22,25 +25,25 @@ const Contact = () => {
 
   const socialLinks = [
     {
-      icon: '🐙',
+      icon: FaGithub,
       label: 'GitHub',
       href: 'https://github.com/yushengtzou/',
       color: 'hover:text-gray-900',
     },
     {
-      icon: '💼',
+      icon: FaLinkedin,
       label: 'LinkedIn',
       href: 'https://www.linkedin.com/in/yushengtzou/',
       color: 'hover:text-blue-600',
     },
     {
-      icon: '🐦',
+      icon: FaTwitter,
       label: 'Twitter',
       href: 'https://twitter.com/yushengtzou',
       color: 'hover:text-blue-400',
     },
     {
-      icon: '📸',
+      icon: FaInstagram,
       label: 'Instagram',
       href: 'https://www.instagram.com/yushengtzou/',
       color: 'hover:text-pink-600',
@@ -50,12 +53,8 @@ const Contact = () => {
   const skills = [
     'Spring Boot',
     'Java',
-    'ESP32 Microcontrollers',
-    'Python',
-    'React',
-    'Three.js',
-    'CUDA',
-    'IoT Systems'
+    'ESP32',
+    'Microcontrollers'
   ]
 
   const languages = [
@@ -68,11 +67,10 @@ const Contact = () => {
       <div className="max-w-7xl mx-auto container-padding">
         <div className="animate-on-scroll text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-            Let's <span className="gradient-text">Connect</span>
+            <span className="gradient-text">Contact</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            I'm always interested in discussing innovative projects, collaboration opportunities, 
-            and technical challenges in AI, 3D computer vision, and software engineering.
+            Professional contact information and technical expertise.
           </p>
         </div>
 
@@ -82,28 +80,31 @@ const Contact = () => {
             <h3 className="text-2xl font-bold text-gray-900 mb-8">Get In Touch</h3>
             
             <div className="space-y-6 mb-12">
-              {contactInfo.map((item, index) => (
-                <div key={index} className="flex items-center">
-                  <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mr-4">
-                    <span className="text-xl">{item.icon}</span>
+              {contactInfo.map((item, index) => {
+                const IconComponent = item.icon
+                return (
+                  <div key={index} className="flex items-center">
+                    <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mr-4">
+                      <IconComponent className="text-xl text-primary-600" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500 font-medium">{item.label}</p>
+                      {item.href !== '#' ? (
+                        <a
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-lg text-gray-900 hover:text-primary-600 transition-colors"
+                        >
+                          {item.value}
+                        </a>
+                      ) : (
+                        <p className="text-lg text-gray-900">{item.value}</p>
+                      )}
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm text-gray-500 font-medium">{item.label}</p>
-                    {item.href !== '#' ? (
-                      <a
-                        href={item.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-lg text-gray-900 hover:text-primary-600 transition-colors"
-                      >
-                        {item.value}
-                      </a>
-                    ) : (
-                      <p className="text-lg text-gray-900">{item.value}</p>
-                    )}
-                  </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
 
             {/* Hot Skills */}
@@ -140,18 +141,21 @@ const Contact = () => {
             <div>
               <h4 className="text-lg font-semibold text-gray-900 mb-6">Follow Me</h4>
               <div className="flex space-x-4">
-                {socialLinks.map((link, index) => (
-                  <a
-                    key={index}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center text-gray-600 transition-all duration-300 hover:scale-110 hover:shadow-lg ${link.color}`}
-                    aria-label={link.label}
-                  >
-                    <span className="text-xl">{link.icon}</span>
-                  </a>
-                ))}
+                {socialLinks.map((link, index) => {
+                  const IconComponent = link.icon
+                  return (
+                    <a
+                      key={index}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center text-gray-600 transition-all duration-300 hover:scale-110 hover:shadow-lg ${link.color}`}
+                      aria-label={link.label}
+                    >
+                      <IconComponent className="text-xl" />
+                    </a>
+                  )
+                })}
               </div>
             </div>
           </div>
@@ -219,7 +223,7 @@ const Contact = () => {
                   type="submit"
                   className="w-full inline-flex items-center justify-center px-8 py-4 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
                 >
-                  <span className="mr-3">📧</span>
+                  <HiMail className="mr-3 text-lg" />
                   Send Message
                 </button>
               </form>

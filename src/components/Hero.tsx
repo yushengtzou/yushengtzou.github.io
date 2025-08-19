@@ -1,10 +1,11 @@
+import { HiMail } from 'react-icons/hi'
+import { FaGithub, FaLinkedin } from 'react-icons/fa'
+
 const Hero = () => {
   const socialLinks = [
-    { href: 'mailto:daniel.tzou1021@gmail.com', icon: '✉', label: 'Email' },
-    { href: 'https://github.com/yushengtzou/', icon: '🐙', label: 'GitHub' },
-    { href: 'https://www.linkedin.com/in/yushengtzou/', icon: '💼', label: 'LinkedIn' },
-    { href: 'https://twitter.com/yushengtzou', icon: '🐦', label: 'Twitter' },
-    { href: 'https://www.instagram.com/yushengtzou/', icon: '📸', label: 'Instagram' },
+    { href: 'mailto:daniel.tzou1021@gmail.com', icon: HiMail, label: 'Email' },
+    { href: 'https://github.com/yushengtzou/', icon: FaGithub, label: 'GitHub' },
+    { href: 'https://www.linkedin.com/in/yushengtzou/', icon: FaLinkedin, label: 'LinkedIn' }
   ]
 
   return (
@@ -39,7 +40,9 @@ const Hero = () => {
           </h1>
           
           <h2 className="text-xl lg:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Software Engineer, AI Innovation Team | 捷立康生物科技股份有限公司 | Taipei, Taiwan
+            Software Engineer  
+            <br />  
+            AI Innovation Team | 捷立康生物科技股份有限公司
           </h2>
 
           {/* Brief Description */}
@@ -51,20 +54,23 @@ const Hero = () => {
 
           {/* Social Links */}
           <div className="flex justify-center space-x-6 mb-12">
-            {socialLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 rounded-full bg-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 group"
-                aria-label={link.label}
-              >
-                <span className="text-2xl group-hover:scale-110 transition-transform inline-block">
-                  {link.icon}
-                </span>
-              </a>
-            ))}
+            {socialLinks.map((link) => {
+              const IconComponent = link.icon
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 rounded-full bg-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 group"
+                  aria-label={link.label}
+                >
+                  <span className="text-2xl group-hover:scale-110 transition-transform inline-block">
+                    <IconComponent />
+                  </span>
+                </a>
+              )
+            })}
           </div>
 
           {/* CTA Button */}
@@ -75,12 +81,6 @@ const Hero = () => {
             >
               View My Experience
               <span className="ml-2">↓</span>
-            </a>
-            <a
-              href="#contact"
-              className="inline-flex items-center px-8 py-4 border-2 border-primary-600 text-primary-600 font-semibold rounded-full hover:bg-primary-600 hover:text-white transition-all duration-300 hover:scale-105"
-            >
-              Get In Touch
             </a>
           </div>
         </div>

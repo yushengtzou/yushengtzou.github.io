@@ -42,8 +42,7 @@ const About = () => {
             About <span className="gradient-text">Me</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Software Engineer with strong cross-domain abilities in resolving critical technical issues 
-            through deep research and solution design, specializing in AI innovation and 3D computer vision.
+            Software Engineer specializing in AI innovation and 3D computer vision.
           </p>
         </div>
 

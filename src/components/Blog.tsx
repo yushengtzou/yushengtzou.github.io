@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-interface BlogPost {
+interface BlogPostType {
   id: number
   title: string
   slug: string
@@ -15,11 +15,11 @@ interface BlogPost {
 }
 
 interface BlogProps {
-  onViewPost?: (post: BlogPost) => void
+  onViewPost?: (post: BlogPostType) => void
 }
 
 const Blog = ({ onViewPost }: BlogProps) => {
-  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([])
+  const [blogPosts, setBlogPosts] = useState<BlogPostType[]>([])
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [isLoading, setIsLoading] = useState(true)
 
@@ -153,7 +153,7 @@ const Blog = ({ onViewPost }: BlogProps) => {
     return isNaN(date.getTime()) ? dateString : date.toLocaleDateString()
   }
 
-  const handlePostClick = (post: BlogPost) => {
+  const handlePostClick = (post: BlogPostType) => {
     // For static posts with existing HTML pages, navigate to them
     const staticLinkMap: { [key: string]: string } = {
       '難與不難': 'category/3.blog/110224af.html',

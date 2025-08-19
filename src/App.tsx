@@ -7,8 +7,9 @@ import Blog from './components/Blog'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import AdminPanel from './components/AdminPanel'
+import BlogPost from './components/BlogPost'
 
-interface BlogPost {
+interface BlogPostType {
   id: number
   title: string
   slug: string
@@ -24,7 +25,7 @@ interface BlogPost {
 
 function App() {
   const [currentView, setCurrentView] = useState<'home' | 'blogPost'>('home')
-  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null)
+  const [selectedPost, setSelectedPost] = useState<BlogPostType | null>(null)
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -65,7 +66,7 @@ function App() {
     }
   }, [currentView])
 
-  const handleViewPost = (post: BlogPost) => {
+  const handleViewPost = (post: BlogPostType) => {
     setSelectedPost(post)
     setCurrentView('blogPost')
     window.scrollTo(0, 0)
@@ -85,54 +86,7 @@ function App() {
   }
 
   if (currentView === 'blogPost' && selectedPost) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <Header />
-        <main className="pt-16">
-          <div className="max-w-4xl mx-auto container-padding py-16">
-            <button
-              onClick={handleBackToHome}
-              className="mb-8 inline-flex items-center text-primary-600 hover:text-primary-700 transition-colors"
-            >
-              <span className="mr-2">←</span>
-              Back to Home
-            </button>
-            
-            <article className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-              {selectedPost.image && (
-                <img
-                  src={selectedPost.image}
-                  alt={selectedPost.title}
-                  className="w-full h-64 object-cover"
-                />
-              )}
-              
-              <div className="p-8">
-                <div className="flex items-center gap-4 mb-6">
-                  <span className="px-3 py-1 bg-primary-100 text-primary-700 text-sm font-medium rounded-full">
-                    {selectedPost.category}
-                  </span>
-                  <span className="text-gray-500 text-sm">{selectedPost.readTime}</span>
-                  <span className="text-gray-500 text-sm">
-                    {new Date(selectedPost.date).toLocaleDateString()}
-                  </span>
-                </div>
-                
-                <h1 className="text-4xl font-bold text-gray-900 mb-6">
-                  {selectedPost.title}
-                </h1>
-                
-                <div className="prose prose-lg max-w-none">
-                  <p className="text-xl text-gray-600 mb-8">{selectedPost.excerpt}</p>
-                  <div className="whitespace-pre-wrap">{selectedPost.content}</div>
-                </div>
-              </div>
-            </article>
-          </div>
-        </main>
-        <Footer />
-      </div>
-    )
+    return <BlogPost post={selectedPost} onBack={handleBackToHome} />
   }
 
   return (
@@ -143,7 +97,7 @@ function App() {
         <About />
         <Experience />
         <Blog onViewPost={handleViewPost} />
-        <Contact />
+        {/* <Contact /> */}
       </main>
       <Footer />
       <AdminPanel />
