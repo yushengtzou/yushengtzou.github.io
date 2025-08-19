@@ -4,7 +4,7 @@ import Hero from './components/Hero'
 import About from './components/About'
 import Experience from './components/Experience'
 import Blog from './components/Blog'
-import Contact from './components/Contact'
+
 import Footer from './components/Footer'
 import AdminPanel from './components/AdminPanel'
 import BlogPost from './components/BlogPost'

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { HiCog, HiLogout, HiUser } from 'react-icons/hi'
+import { HiLogout, HiUser } from 'react-icons/hi'
 import AdminLogin from './AdminLogin'
 
 interface BlogPost {

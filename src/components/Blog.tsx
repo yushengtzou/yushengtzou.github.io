@@ -226,7 +226,7 @@ const Blog = ({ onViewPost }: BlogProps) => {
 
         {/* Blog Posts Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {filteredPosts.map((post, index) => (
+          {filteredPosts.map((post) => (
             <article key={post.id} className="animate-on-scroll group">
               <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden card-hover h-full">
                 {/* Featured Image */}
