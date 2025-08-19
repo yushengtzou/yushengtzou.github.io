@@ -40,10 +40,6 @@ const Hero = () => {
             <span className="gradient-text">Yu-Sheng Tzou</span>
           </h1>
           
-          <h2 className="text-xl lg:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Life long learner
-          </h2>
-
           {/* Brief Description */}
           <p className="text-lg text-gray-500 mb-12 max-w-2xl mx-auto leading-relaxed">
             Strong cross-domain abilities in resolving critical technical issues through deep research and solution design. 
@@ -86,10 +82,6 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <span className="text-2xl text-gray-400">↓</span>
-      </div>
     </section>
   )
 }

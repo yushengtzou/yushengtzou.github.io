@@ -33,7 +33,7 @@ const Header = () => {
             href="#home"
             className="text-xl font-bold gradient-text hover:scale-105 transition-transform"
           >
-            Yu-Sheng Tzou
+            
           </a>
 
           {/* Desktop Navigation */}
