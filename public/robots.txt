@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://yushengtzou.github.io/sitemap.xml
+
+# Disallow admin areas
+Disallow: /admin
+Disallow: /server
+Disallow: /data
+
+# Allow important files
+Allow: /images/
+Allow: /*.css
+Allow: /*.js 
