@@ -240,21 +240,17 @@ const Blog = ({ onViewPost }: BlogProps) => {
                 )}
                 
                 {/* Post Header */}
-                <div className="p-6 border-b border-gray-100">
-                  <div className="flex items-center justify-between mb-3">
+                <div className="p-6">
+                  <div className="flex items-center gap-3 mb-4">
                     <span className="px-3 py-1 bg-primary-100 text-primary-700 text-sm font-medium rounded-full">
                       {post.category}
                     </span>
-                    <span className="text-sm text-gray-500">{post.readTime}</span>
+                    <span className="text-gray-500 text-sm">{post.readTime}</span>
                   </div>
                   
                   <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors line-clamp-2">
                     {post.title}
                   </h3>
-                  
-                  <p className="text-gray-600 leading-relaxed line-clamp-3">
-                    {post.excerpt}
-                  </p>
                 </div>
 
                 {/* Post Footer */}
@@ -289,7 +285,7 @@ const Blog = ({ onViewPost }: BlogProps) => {
         )}
 
         {/* View All Posts */}
-        <div className="animate-on-scroll text-center">
+        {/* <div className="animate-on-scroll text-center">
           <a
             href="category/3.blog/"
             className="inline-flex items-center px-8 py-4 bg-primary-600 text-white font-semibold rounded-full hover:bg-primary-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
@@ -297,7 +293,20 @@ const Blog = ({ onViewPost }: BlogProps) => {
             View All Posts
             <span className="ml-3">🔗</span>
           </a>
-        </div>
+        </div> */}
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+
       </div>
     </section>
   )

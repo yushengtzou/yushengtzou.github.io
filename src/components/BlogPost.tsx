@@ -37,7 +37,7 @@ const BlogPost = ({ post, onBack }: BlogPostProps) => {
     <div className="min-h-screen bg-gray-50">
       {/* Header with back button */}
       <div className="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <button
               onClick={onBack}
@@ -58,7 +58,7 @@ const BlogPost = ({ post, onBack }: BlogPostProps) => {
       </div>
 
       {/* Main content */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Article header */}
         <header className="mb-8">
           {post.image && (
@@ -76,7 +76,7 @@ const BlogPost = ({ post, onBack }: BlogPostProps) => {
               {post.title}
             </h1>
             
-            <div className="flex items-center justify-center space-x-4 text-gray-600">
+            <div className="flex items-center justify-center space-x-4 text-gray-600 text-lg">
               <span className="flex items-center">
                 <span className="mr-1">👤</span>
                 {post.author}
@@ -91,45 +91,39 @@ const BlogPost = ({ post, onBack }: BlogPostProps) => {
               </span>
             </div>
           </div>
-
-          {post.excerpt && (
-            <div className="text-xl text-gray-600 text-center max-w-3xl mx-auto leading-relaxed">
-              {post.excerpt}
-            </div>
-          )}
         </header>
 
         {/* Article content */}
-        <article className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-          <div className="p-6 md:p-8 lg:p-12">
-            <div className="prose prose-lg md:prose-xl max-w-none">
+        <article className="max-w-none">
+          <div className="p-8 md:p-12 lg:p-16">
+            <div className="prose prose-xl md:prose-2xl max-w-none">
               <ReactMarkdown
                 remarkPlugins={[remarkGfm, remarkMath]}
                 rehypePlugins={[rehypeHighlight, rehypeRaw, rehypeKatex]}
                 components={{
                   // Custom styling for different elements
                   h1: ({ children }) => (
-                    <h1 className="text-3xl font-bold text-gray-900 mb-6 mt-8 pb-3 border-b border-gray-200">
+                    <h1 className="text-4xl font-bold text-gray-900 mb-8 mt-12 pb-4 border-b border-gray-200">
                       {children}
                     </h1>
                   ),
                   h2: ({ children }) => (
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4 mt-8">
+                    <h2 className="text-3xl font-bold text-gray-900 mb-6 mt-10">
                       {children}
                     </h2>
                   ),
                   h3: ({ children }) => (
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-6">
+                    <h3 className="text-2xl font-semibold text-gray-900 mb-4 mt-8">
                       {children}
                     </h3>
                   ),
                   p: ({ children }) => (
-                    <p className="text-gray-700 leading-relaxed mb-4">
+                    <p className="text-gray-700 leading-relaxed mb-6 text-lg">
                       {children}
                     </p>
                   ),
                   blockquote: ({ children }) => (
-                    <blockquote className="border-l-4 border-primary-400 pl-4 my-6 bg-gray-50 py-2 rounded-r">
+                    <blockquote className="border-l-4 border-primary-400 pl-6 my-8 bg-gray-50 py-4 rounded-r text-lg">
                       <div className="text-gray-700 italic">
                         {children}
                       </div>
@@ -141,7 +135,7 @@ const BlogPost = ({ post, onBack }: BlogPostProps) => {
                     
                     if (isInline) {
                       return (
-                        <code className="bg-gray-100 text-primary-600 px-1.5 py-0.5 rounded text-sm font-mono" {...props}>
+                        <code className="bg-gray-100 text-primary-600 px-2 py-1 rounded text-base font-mono" {...props}>
                           {children}
                         </code>
                       )
@@ -154,17 +148,17 @@ const BlogPost = ({ post, onBack }: BlogPostProps) => {
                     )
                   },
                   pre: ({ children }) => (
-                    <pre className="bg-gray-900 text-gray-100 rounded-lg p-4 overflow-x-auto my-6 border">
+                    <pre className="bg-gray-900 text-gray-100 rounded-lg p-6 overflow-x-auto my-8 border text-base">
                       {children}
                     </pre>
                   ),
                   ul: ({ children }) => (
-                    <ul className="list-disc list-inside space-y-2 my-4 text-gray-700">
+                    <ul className="list-disc list-inside space-y-3 my-6 text-gray-700 text-lg">
                       {children}
                     </ul>
                   ),
                   ol: ({ children }) => (
-                    <ol className="list-decimal list-inside space-y-2 my-4 text-gray-700">
+                    <ol className="list-decimal list-inside space-y-3 my-6 text-gray-700 text-lg">
                       {children}
                     </ol>
                   ),
@@ -184,7 +178,7 @@ const BlogPost = ({ post, onBack }: BlogPostProps) => {
                     </a>
                   ),
                   table: ({ children }) => (
-                    <div className="overflow-x-auto my-6">
+                    <div className="overflow-x-auto my-8">
                       <table className="min-w-full border border-gray-300 rounded-lg overflow-hidden">
                         {children}
                       </table>
@@ -196,31 +190,31 @@ const BlogPost = ({ post, onBack }: BlogPostProps) => {
                     </thead>
                   ),
                   th: ({ children }) => (
-                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 border-b border-gray-300">
+                    <th className="px-6 py-4 text-left text-base font-semibold text-gray-900 border-b border-gray-300">
                       {children}
                     </th>
                   ),
                   td: ({ children }) => (
-                    <td className="px-4 py-3 text-sm text-gray-700 border-b border-gray-200">
+                    <td className="px-6 py-4 text-base text-gray-700 border-b border-gray-200">
                       {children}
                     </td>
                   ),
                   img: ({ src, alt }) => (
-                    <div className="my-6">
+                    <div className="my-8">
                       <img
                         src={src}
                         alt={alt}
                         className="max-w-full h-auto rounded-lg shadow-md mx-auto"
                       />
                       {alt && (
-                        <p className="text-center text-sm text-gray-500 mt-2 italic">
+                        <p className="text-center text-base text-gray-500 mt-3 italic">
                           {alt}
                         </p>
                       )}
                     </div>
                   ),
                   hr: () => (
-                    <hr className="my-8 border-gray-300" />
+                    <hr className="my-12 border-gray-300" />
                   )
                 }}
               >
