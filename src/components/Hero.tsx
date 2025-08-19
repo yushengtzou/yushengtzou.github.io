@@ -41,14 +41,13 @@ const Hero = () => {
           </h1>
           
           <h2 className="text-xl lg:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Software Engineer  
-            <br />  
-            AI Innovation Team | 捷立康生物科技股份有限公司
+            Life long learner
           </h2>
 
           {/* Brief Description */}
           <p className="text-lg text-gray-500 mb-12 max-w-2xl mx-auto leading-relaxed">
             Strong cross-domain abilities in resolving critical technical issues through deep research and solution design. 
+            <br />
             <br />
             <span className="text-primary-600 font-semibold italic">"Treat every day as a learning day. Strive to it."</span>
           </p>

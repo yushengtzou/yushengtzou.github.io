@@ -41,15 +41,15 @@ const About = () => {
             </h3>
             <div className="prose prose-lg text-gray-600 space-y-4">
               <p>
-                Currently serving as a Software Engineer in the AI Innovation Team at 捷立康生物科技股份有限公司, 
+                Currently serving as a Software Engineer in the AI Innovation Team at A-TOP Biotech Ltd., 
                 where I lead the development of cutting-edge 3D facial aesthetic analysis systems. My work spans 
                 the entire technology stack, from hardware design to full-stack web applications.
               </p>
               <p>
-                As the Lead Developer & System Architect for the 3D FACE MODEL AESTHETIC SYSTEM, I spearhead 
+                As the Lead Developer & System Architect for the 3D BeatyAI system, I spearhead 
                 end-to-end development of novel systems for 3D facial aesthetic analysis. This includes architecting 
                 foundational algorithms, developing IoT imaging systems, and delivering high-performance web platforms 
-                with React/Three.js achieving smooth 60fps manipulation of large-scale 3D models.
+                with React/Three.js achieving smooth 60 FPS manipulation of large-scale 3D models.
               </p>
               <p>
                 My expertise bridges multiple domains: from Java Spring Boot backends orchestrating Python AI modules, 

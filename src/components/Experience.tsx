@@ -1,13 +1,13 @@
 const Experience = () => {
   const experiences = [
     {
-      company: '捷立康生物科技股份有限公司',
+      company: 'A-TOP Health BIOTECH, Ltd',
       location: 'Neihu District, Taipei City, Taiwan',
       positions: [
         {
           title: 'Software Engineer, AI Innovation Team',
           period: '2025年6月 - Present (3個月)',
-          description: '3D FACE MODEL AESTHETIC SYSTEM | Lead Developer & System Architect',
+          description: '3D BeatyAI system | Lead Developer & System Architect',
           achievements: [
             'Spearheaded the complete, end-to-end development of a novel system for 3D facial aesthetic analysis, encompassing hardware design, core algorithm architecture, and a full-stack web application.',
             'Architected the foundational system for the 3D face reconstruction algorithm, defining data flows, task partitioning, and system interoperability.',
