@@ -76,7 +76,7 @@ const BlogPost = ({ post, onBack }: BlogPostProps) => {
               {post.title}
             </h1>
             
-            <div className="flex items-center justify-center space-x-4 text-gray-600 text-lg">
+            <div className="flex items-center justify-center space-x-4 text-gray-600 text-lg pt-10">
               <span className="flex items-center">
                 <span className="mr-1">👤</span>
                 {post.author}
