@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import { HiCog, HiLogout, HiUser } from 'react-icons/hi'
+import AdminLogin from './AdminLogin'
 
 interface BlogPost {
   id: number
@@ -15,27 +17,107 @@ interface BlogPost {
 }
 
 const AdminPanel = () => {
-  const [posts, setPosts] = useState<BlogPost[]>([])
+  // Authentication state
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [loginLoading, setLoginLoading] = useState(false)
+  const [loginError, setLoginError] = useState<string | null>(null)
+  const [currentUser, setCurrentUser] = useState<string>('')
+
+  // Existing state
   const [isOpen, setIsOpen] = useState(false)
+  const [posts, setPosts] = useState<BlogPost[]>([])
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
   const [serverStatus, setServerStatus] = useState<'checking' | 'online' | 'offline'>('checking')
+  const [error, setError] = useState<string | null>(null)
+  const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [newPost, setNewPost] = useState({
     title: '',
     content: '',
-    excerpt: '',
-    category: 'General'
+    category: 'General',
+    author: 'Yu-Sheng Tzou'
   })
-  const [selectedFile, setSelectedFile] = useState<File | null>(null)
 
-  const categories = ['General', 'Philosophy', 'Programming', 'Career', 'Life', 'Problem Solving', 'Research', 'AI/ML']
-
+  // Check authentication status on mount
   useEffect(() => {
-    checkServerStatus()
-    if (isOpen) {
+    const authStatus = localStorage.getItem('adminAuth')
+    const authUser = localStorage.getItem('adminUser')
+    if (authStatus === 'true' && authUser) {
+      setIsAuthenticated(true)
+      setCurrentUser(authUser)
+    }
+  }, [])
+
+  // Hidden keyboard shortcut for admin access
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      // Ctrl + Shift + A to open admin login
+      if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+        e.preventDefault()
+        if (!isAuthenticated) {
+          // Show login form directly
+          setIsOpen(true)
+        } else {
+          // If already authenticated, toggle admin panel
+          setIsOpen(!isOpen)
+        }
+      }
+      // ESC to close admin panel
+      if (e.key === 'Escape' && (isOpen || !isAuthenticated)) {
+        setIsOpen(false)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyPress)
+    return () => window.removeEventListener('keydown', handleKeyPress)
+  }, [isAuthenticated, isOpen])
+
+  // Check server status
+  useEffect(() => {
+    if (isAuthenticated) {
+      checkServerStatus()
+    }
+  }, [isAuthenticated])
+
+  // Fetch posts when authenticated and server is online
+  useEffect(() => {
+    if (isAuthenticated && serverStatus === 'online') {
       fetchPosts()
     }
-  }, [isOpen])
+  }, [isAuthenticated, serverStatus])
+
+  const handleLogin = async (username: string, password: string) => {
+    setLoginLoading(true)
+    setLoginError(null)
+
+    try {
+      // Simulate authentication (replace with real API call)
+      await new Promise(resolve => setTimeout(resolve, 1000))
+      
+      // Demo credentials
+      if (username === 'admin' && password === 'admin123') {
+        localStorage.setItem('adminAuth', 'true')
+        localStorage.setItem('adminUser', username)
+        setIsAuthenticated(true)
+        setCurrentUser(username)
+        setLoginError(null)
+      } else {
+        setLoginError('Invalid username or password')
+      }
+    } catch (err) {
+      setLoginError('Login failed. Please try again.')
+    } finally {
+      setLoginLoading(false)
+    }
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem('adminAuth')
+    localStorage.removeItem('adminUser')
+    setIsAuthenticated(false)
+    setCurrentUser('')
+    setIsOpen(false)
+    setPosts([])
+  }
 
   const checkServerStatus = async () => {
     try {
@@ -46,43 +128,43 @@ const AdminPanel = () => {
       } else {
         setServerStatus('offline')
       }
-    } catch (error) {
+    } catch (err) {
       setServerStatus('offline')
-      setError('Backend server is not running. Please start the server with: npm run server')
+      setError('Cannot connect to server. Please ensure the backend is running.')
     }
   }
 
   const fetchPosts = async () => {
     if (serverStatus !== 'online') return
     
+    setIsLoading(true)
     try {
       const response = await fetch('http://localhost:3001/api/posts')
       if (response.ok) {
         const data = await response.json()
         setPosts(data)
+        setError(null)
+      } else {
+        setError('Failed to fetch posts')
       }
-    } catch (error) {
-      console.error('Error fetching posts:', error)
-      setError('Failed to fetch posts from server')
+    } catch (err) {
+      setError('Error fetching posts: ' + (err as Error).message)
+    } finally {
+      setIsLoading(false)
     }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (serverStatus !== 'online') {
-      alert('Backend server is not running!')
-      return
-    }
+    if (serverStatus !== 'online') return
 
     setIsLoading(true)
-    setError(null)
-
     try {
       const formData = new FormData()
       formData.append('title', newPost.title)
       formData.append('content', newPost.content)
-      formData.append('excerpt', newPost.excerpt)
       formData.append('category', newPost.category)
+      formData.append('author', newPost.author)
       
       if (selectedFile) {
         formData.append('image', selectedFile)
@@ -94,274 +176,255 @@ const AdminPanel = () => {
       })
 
       if (response.ok) {
-        const createdPost = await response.json()
-        setPosts([createdPost, ...posts])
-        setNewPost({ title: '', content: '', excerpt: '', category: 'General' })
+        setNewPost({ title: '', content: '', category: 'General', author: 'Yu-Sheng Tzou' })
         setSelectedFile(null)
-        setIsOpen(false)
-        alert('Blog post created successfully! 🎉')
-        // Trigger a custom event to refresh the Blog component
+        await fetchPosts()
+        
+        // Dispatch event to refresh blog component
         window.dispatchEvent(new CustomEvent('blogPostUpdated'))
+        setError(null)
       } else {
-        const error = await response.json()
-        setError(`Error: ${error.error}`)
+        setError('Failed to create post')
       }
-    } catch (error) {
-      console.error('Error creating post:', error)
-      setError('Failed to create blog post')
+    } catch (err) {
+      setError('Error creating post: ' + (err as Error).message)
     } finally {
       setIsLoading(false)
     }
   }
 
-  const handleDelete = async (postId: number) => {
+  const handleDelete = async (id: number) => {
+    if (serverStatus !== 'online') return
     if (!confirm('Are you sure you want to delete this post?')) return
 
     try {
-      const response = await fetch(`http://localhost:3001/api/posts/${postId}`, {
+      const response = await fetch(`http://localhost:3001/api/posts/${id}`, {
         method: 'DELETE'
       })
 
       if (response.ok) {
-        setPosts(posts.filter(post => post.id !== postId))
-        alert('Blog post deleted successfully!')
+        await fetchPosts()
         window.dispatchEvent(new CustomEvent('blogPostUpdated'))
+        setError(null)
       } else {
-        setError('Failed to delete blog post')
+        setError('Failed to delete post')
       }
-    } catch (error) {
-      console.error('Error deleting post:', error)
-      setError('Failed to delete blog post')
+    } catch (err) {
+      setError('Error deleting post: ' + (err as Error).message)
     }
   }
 
-  const togglePublished = async (post: BlogPost) => {
-    try {
-      const formData = new FormData()
-      formData.append('published', (!post.published).toString())
+  const togglePublished = async (id: number, published: boolean) => {
+    if (serverStatus !== 'online') return
 
-      const response = await fetch(`http://localhost:3001/api/posts/${post.id}`, {
+    try {
+      const response = await fetch(`http://localhost:3001/api/posts/${id}`, {
         method: 'PUT',
-        body: formData
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ published: !published })
       })
 
       if (response.ok) {
-        const updatedPost = await response.json()
-        setPosts(posts.map(p => p.id === post.id ? updatedPost : p))
+        await fetchPosts()
         window.dispatchEvent(new CustomEvent('blogPostUpdated'))
+        setError(null)
+      } else {
+        setError('Failed to update post')
       }
-    } catch (error) {
-      console.error('Error updating post:', error)
-      setError('Failed to update post')
+    } catch (err) {
+      setError('Error updating post: ' + (err as Error).message)
     }
+  }
+
+  // Show login form if not authenticated and admin panel is triggered
+  if (!isAuthenticated && isOpen) {
+    return <AdminLogin onLogin={handleLogin} isLoading={loginLoading} error={loginError} />
+  }
+
+  // Don't render anything if not authenticated and panel is not open
+  if (!isAuthenticated) {
+    return null
   }
 
   return (
     <>
-      {/* Admin Toggle Button */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-8 right-8 z-50 text-white p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110 ${
-          serverStatus === 'online' 
-            ? 'bg-primary-600 hover:bg-primary-700' 
-            : 'bg-red-600 hover:bg-red-700'
-        }`}
-        title={serverStatus === 'online' ? 'Admin Panel' : 'Admin Panel (Server Offline)'}
-      >
-        <span className="text-xl">⚙️</span>
-      </button>
+      {/* Hidden Admin Panel - Only visible when authenticated */}
+      {isAuthenticated && (
+        <>
+          {/* Small indicator for authenticated admin (optional) */}
+          <div className="fixed bottom-6 right-6 w-3 h-3 bg-green-500 rounded-full z-40 opacity-50" title="Admin authenticated - Press Ctrl+Shift+A"></div>
 
-      {/* Admin Panel Modal */}
-      {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto m-4">
-            <div className="p-6 border-b border-gray-200">
-              <div className="flex justify-between items-center">
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900">Blog Admin Panel</h2>
-                  <div className="flex items-center gap-2 mt-2">
-                    <div className={`w-3 h-3 rounded-full ${
-                      serverStatus === 'online' ? 'bg-green-500' : 
-                      serverStatus === 'offline' ? 'bg-red-500' : 'bg-yellow-500'
-                    }`}></div>
-                    <span className="text-sm text-gray-600">
-                      Server: {serverStatus === 'online' ? 'Online' : serverStatus === 'offline' ? 'Offline' : 'Checking...'}
-                    </span>
+          {/* Admin Panel */}
+          {isOpen && (
+            <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center">
+              <div className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] m-4 overflow-hidden">
+                {/* Header */}
+                <div className="bg-primary-600 text-white p-6 flex items-center justify-between">
+                  <div className="flex items-center">
+                    <HiUser className="w-6 h-6 mr-3" />
+                    <div>
+                      <h2 className="text-2xl font-bold">Admin Panel</h2>
+                      <p className="text-primary-100">Welcome back, {currentUser}</p>
+                      <p className="text-primary-200 text-sm">Press Ctrl+Shift+A to toggle or ESC to close</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <button
+                      onClick={handleLogout}
+                      className="flex items-center px-4 py-2 bg-primary-700 hover:bg-primary-800 rounded-lg transition-colors"
+                      title="Logout"
+                    >
+                      <HiLogout className="w-4 h-4 mr-2" />
+                      Logout
+                    </button>
+                    <button
+                      onClick={() => setIsOpen(false)}
+                      className="text-2xl hover:bg-primary-700 rounded-lg w-10 h-10 flex items-center justify-center transition-colors"
+                    >
+                      ×
+                    </button>
                   </div>
                 </div>
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="text-gray-500 hover:text-gray-700 text-2xl"
-                >
-                  ✕
-                </button>
+
+                <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
+                  {/* Server Status */}
+                  <div className="mb-6 p-4 rounded-lg border">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-lg font-semibold">Server Status</h3>
+                      <div className="flex items-center">
+                        <div className={`w-3 h-3 rounded-full mr-2 ${
+                          serverStatus === 'online' ? 'bg-green-500' :
+                          serverStatus === 'offline' ? 'bg-red-500' : 'bg-yellow-500'
+                        }`}></div>
+                        <span className="text-sm font-medium">
+                          {serverStatus === 'online' ? 'Online' :
+                           serverStatus === 'offline' ? 'Offline' : 'Checking...'}
+                        </span>
+                      </div>
+                    </div>
+                    {serverStatus === 'offline' && (
+                      <div className="mt-2 text-sm text-red-600">
+                        Backend server is not running. Please start the server with: npm run server
+                      </div>
+                    )}
+                  </div>
+
+                  {error && (
+                    <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                      <p className="text-red-700">{error}</p>
+                    </div>
+                  )}
+
+                  {serverStatus === 'online' ? (
+                    <div className="grid md:grid-cols-2 gap-6">
+                      {/* Create New Post */}
+                      <div>
+                        <h3 className="text-xl font-bold mb-4">Create New Post</h3>
+                        <form onSubmit={handleSubmit} className="space-y-4">
+                          <input
+                            type="text"
+                            placeholder="Post Title"
+                            value={newPost.title}
+                            onChange={(e) => setNewPost(prev => ({ ...prev, title: e.target.value }))}
+                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                            required
+                          />
+                          
+                          <select
+                            value={newPost.category}
+                            onChange={(e) => setNewPost(prev => ({ ...prev, category: e.target.value }))}
+                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                          >
+                            <option value="General">General</option>
+                            <option value="Technical">Technical</option>
+                            <option value="Research">Research</option>
+                            <option value="Tutorial">Tutorial</option>
+                          </select>
+
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
+                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                          />
+                          
+                          <textarea
+                            placeholder="Post Content (Markdown supported)"
+                            value={newPost.content}
+                            onChange={(e) => setNewPost(prev => ({ ...prev, content: e.target.value }))}
+                            className="w-full p-3 border border-gray-300 rounded-lg h-32 resize-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                            required
+                          />
+                          
+                          <button
+                            type="submit"
+                            disabled={isLoading}
+                            className="w-full bg-primary-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-primary-700 disabled:opacity-50 transition-colors"
+                          >
+                            {isLoading ? 'Creating...' : 'Create Post'}
+                          </button>
+                        </form>
+                      </div>
+
+                      {/* Manage Posts */}
+                      <div>
+                        <h3 className="text-xl font-bold mb-4">Manage Posts ({posts.length})</h3>
+                        <div className="space-y-3 max-h-96 overflow-y-auto">
+                          {posts.map((post) => (
+                            <div key={post.id} className="border border-gray-200 rounded-lg p-4">
+                              <div className="flex items-start justify-between">
+                                <div className="flex-1">
+                                  <h4 className="font-semibold text-gray-900 mb-1">{post.title}</h4>
+                                  <p className="text-sm text-gray-600 mb-2">{post.category} • {post.readTime}</p>
+                                  <div className="flex items-center space-x-2">
+                                    <span className={`px-2 py-1 text-xs rounded-full ${
+                                      post.published 
+                                        ? 'bg-green-100 text-green-700' 
+                                        : 'bg-yellow-100 text-yellow-700'
+                                    }`}>
+                                      {post.published ? 'Published' : 'Draft'}
+                                    </span>
+                                  </div>
+                                </div>
+                                <div className="flex flex-col space-y-1 ml-4">
+                                  <button
+                                    onClick={() => togglePublished(post.id, post.published)}
+                                    className={`px-3 py-1 text-xs rounded ${
+                                      post.published 
+                                        ? 'bg-yellow-500 text-white hover:bg-yellow-600' 
+                                        : 'bg-green-500 text-white hover:bg-green-600'
+                                    }`}
+                                  >
+                                    {post.published ? 'Unpublish' : 'Publish'}
+                                  </button>
+                                  <button
+                                    onClick={() => handleDelete(post.id)}
+                                    className="px-3 py-1 bg-red-500 text-white text-xs rounded hover:bg-red-600"
+                                  >
+                                    Delete
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                          {posts.length === 0 && !isLoading && (
+                            <p className="text-gray-500 text-center py-8">No posts found</p>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="text-center py-12">
+                      <div className="text-6xl mb-4">⚠️</div>
+                      <h3 className="text-xl font-semibold text-gray-900 mb-2">Server Offline</h3>
+                      <p className="text-gray-600">Please start the backend server to manage blog posts.</p>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
-
-            <div className="p-6">
-              {/* Error Display */}
-              {error && (
-                <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-                  <div className="flex items-center">
-                    <span className="text-red-500 mr-2">❌</span>
-                    <p className="text-red-700">{error}</p>
-                  </div>
-                  {serverStatus === 'offline' && (
-                    <div className="mt-2">
-                      <button
-                        onClick={checkServerStatus}
-                        className="text-sm bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
-                      >
-                        Retry Connection
-                      </button>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* Create New Post Form */}
-              {serverStatus === 'online' && (
-                <div className="mb-8">
-                  <h3 className="text-xl font-semibold mb-4">Create New Blog Post</h3>
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Title
-                      </label>
-                      <input
-                        type="text"
-                        value={newPost.title}
-                        onChange={(e) => setNewPost({...newPost, title: e.target.value})}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                        required
-                      />
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Category
-                        </label>
-                        <select
-                          value={newPost.category}
-                          onChange={(e) => setNewPost({...newPost, category: e.target.value})}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                        >
-                          {categories.map(cat => (
-                            <option key={cat} value={cat}>{cat}</option>
-                          ))}
-                        </select>
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Featured Image
-                        </label>
-                        <input
-                          type="file"
-                          accept="image/*"
-                          onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Excerpt
-                      </label>
-                      <textarea
-                        value={newPost.excerpt}
-                        onChange={(e) => setNewPost({...newPost, excerpt: e.target.value})}
-                        rows={2}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                        placeholder="Brief description of the post..."
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Content (Markdown supported)
-                      </label>
-                      <textarea
-                        value={newPost.content}
-                        onChange={(e) => setNewPost({...newPost, content: e.target.value})}
-                        rows={8}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                        placeholder="Write your blog post content here..."
-                        required
-                      />
-                    </div>
-
-                    <button
-                      type="submit"
-                      disabled={isLoading}
-                      className="w-full bg-primary-600 text-white py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors disabled:opacity-50"
-                    >
-                      {isLoading ? 'Creating...' : 'Create Blog Post'}
-                    </button>
-                  </form>
-                </div>
-              )}
-
-              {/* Existing Posts */}
-              {serverStatus === 'online' && (
-                <div>
-                  <h3 className="text-xl font-semibold mb-4">Manage Existing Posts</h3>
-                  {posts.length === 0 ? (
-                    <p className="text-gray-500">No blog posts found.</p>
-                  ) : (
-                    <div className="space-y-4">
-                      {posts.map(post => (
-                        <div key={post.id} className="border border-gray-200 rounded-lg p-4">
-                          <div className="flex justify-between items-start">
-                            <div className="flex-1">
-                              <h4 className="font-semibold text-lg">{post.title}</h4>
-                              <p className="text-sm text-gray-500 mb-2">
-                                {post.category} • {new Date(post.date).toLocaleDateString()}
-                              </p>
-                              <p className="text-gray-600 text-sm">{post.excerpt}</p>
-                            </div>
-                            <div className="flex items-center space-x-3 ml-4">
-                              <button
-                                onClick={() => togglePublished(post)}
-                                className={`px-3 py-1 rounded-full text-xs font-medium ${
-                                  post.published 
-                                    ? 'bg-green-100 text-green-700' 
-                                    : 'bg-gray-100 text-gray-700'
-                                }`}
-                              >
-                                {post.published ? 'Published' : 'Draft'}
-                              </button>
-                              <button
-                                onClick={() => handleDelete(post.id)}
-                                className="text-red-600 hover:text-red-800 text-sm"
-                              >
-                                🗑️
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* Offline Message */}
-              {serverStatus === 'offline' && (
-                <div className="text-center py-8">
-                  <div className="text-6xl mb-4">🔌</div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Server Offline</h3>
-                  <p className="text-gray-600 mb-4">
-                    The blog management server is not running. Please start it in a new terminal:
-                  </p>
-                  <code className="bg-gray-100 px-4 py-2 rounded-lg">npm run server</code>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
+          )}
+        </>
       )}
     </>
   )
