@@ -299,15 +299,6 @@ const Blog = ({ onViewPost }: BlogProps) => {
         <br />
         <br />
         <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-
       </div>
     </section>
   )
