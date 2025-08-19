@@ -206,11 +206,6 @@ const BlogPost = ({ post, onBack }: BlogPostProps) => {
                         alt={alt}
                         className="max-w-full h-auto rounded-lg shadow-md mx-auto"
                       />
-                      {alt && (
-                        <p className="text-center text-base text-gray-500 mt-3 italic">
-                          {alt}
-                        </p>
-                      )}
                     </div>
                   ),
                   hr: () => (
