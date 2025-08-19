@@ -128,7 +128,8 @@ const Blog = ({ onViewPost }: BlogProps) => {
 
   const fetchBlogPosts = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/posts')
+      const baseUrl = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3001'
+      const response = await fetch(`${baseUrl}/api/posts`)
       if (response.ok) {
         const data = await response.json()
         setBlogPosts(data)

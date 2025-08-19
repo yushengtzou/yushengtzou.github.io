@@ -121,7 +121,8 @@ const AdminPanel = () => {
 
   const checkServerStatus = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/health')
+      const baseUrl = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3001'
+      const response = await fetch(`${baseUrl}/api/health`)
       if (response.ok) {
         setServerStatus('online')
         setError(null)
@@ -139,7 +140,8 @@ const AdminPanel = () => {
     
     setIsLoading(true)
     try {
-      const response = await fetch('http://localhost:3001/api/posts')
+      const baseUrl = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3001'
+      const response = await fetch(`${baseUrl}/api/posts`)
       if (response.ok) {
         const data = await response.json()
         setPosts(data)
@@ -170,7 +172,8 @@ const AdminPanel = () => {
         formData.append('image', selectedFile)
       }
 
-      const response = await fetch('http://localhost:3001/api/posts', {
+      const baseUrl = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3001'
+      const response = await fetch(`${baseUrl}/api/posts`, {
         method: 'POST',
         body: formData
       })
@@ -198,7 +201,8 @@ const AdminPanel = () => {
     if (!confirm('Are you sure you want to delete this post?')) return
 
     try {
-      const response = await fetch(`http://localhost:3001/api/posts/${id}`, {
+      const baseUrl = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3001'
+      const response = await fetch(`${baseUrl}/api/posts/${id}`, {
         method: 'DELETE'
       })
 
@@ -218,7 +222,8 @@ const AdminPanel = () => {
     if (serverStatus !== 'online') return
 
     try {
-      const response = await fetch(`http://localhost:3001/api/posts/${id}`, {
+      const baseUrl = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3001'
+      const response = await fetch(`${baseUrl}/api/posts/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ published: !published })
