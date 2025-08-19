@@ -6,7 +6,7 @@ const Experience = () => {
       positions: [
         {
           title: 'Software Engineer, AI Innovation Team',
-          period: '2025年6月 - Present (3個月)',
+          period: '2025.6 - Present',
           description: '3D BeautyAI system | Lead Developer & System Architect',
           achievements: [
             'Spearheaded the complete, end-to-end development of a novel system for 3D facial aesthetic analysis, encompassing hardware design, core algorithm architecture, and a full-stack web application.',
@@ -21,7 +21,7 @@ const Experience = () => {
         },
         {
           title: 'Project Intern, AI Innovation Team',
-          period: '2024年4月 - 2025年6月 (1年3個月)',
+          period: '2024.4 - 2025.6',
           description: 'Medical Aesthetics 3D Simulation System',
           achievements: [
             'Designed and implemented a solution for cheek thread-lifting pre-operative 3D simulation and visualization techniques within a self-developed full stack web app for medical aesthetics consultation process.',
@@ -34,7 +34,6 @@ const Experience = () => {
       ],
       logo: '/images/A-TOP.png',
       isImage: true,
-      totalDuration: '1年5個月'
     }
   ]
 
@@ -72,10 +71,6 @@ const Experience = () => {
                   <div className="flex-1">
                     <h3 className="text-2xl font-bold text-gray-900 mb-2">{exp.company}</h3>
                     <p className="text-gray-600 mb-2">{exp.location}</p>
-                    <div className="inline-flex items-center px-3 py-1 bg-green-100 text-green-700 text-sm font-medium rounded-full">
-                      <span className="mr-2">⏱️</span>
-                      Total: {exp.totalDuration}
-                    </div>
                   </div>
                 </div>
 

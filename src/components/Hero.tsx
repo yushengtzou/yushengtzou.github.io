@@ -24,7 +24,7 @@ const Hero = () => {
       <div className="relative z-10 max-w-7xl mx-auto container-padding text-center">
         <div className="animate-on-scroll">
           {/* Profile Image */}
-          <div className="mb-8 flex justify-center">
+          <div className="mb-8 flex justify-center pt-14">
             <div className="relative">
               <img
                 src="/images/logo.jpg"

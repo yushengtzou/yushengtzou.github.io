@@ -42,7 +42,7 @@ const About = () => {
             </h3>
             <div className="prose prose-lg text-gray-600 space-y-4">
               <p>
-                Currently serving as a Software Engineer in the AI Innovation Team at A-TOP Biotech Ltd., 
+                Currently serving as a Software Engineer in the AI Innovation Team at A-TOP Health Biotech Ltd., 
                 where I lead the development of cutting-edge 3D facial aesthetic analysis systems. My work spans 
                 the entire technology stack, from hardware design to full-stack web applications.
               </p>
