@@ -119,7 +119,7 @@ const Blog = ({ onViewPost }: BlogProps) => {
       <div className="max-w-7xl mx-auto container-padding">
         <div className="animate-on-scroll text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-            Latest <span className="gradient-text">Thoughts</span>
+            Technical <span className="gradient-text">Blog</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Sharing insights on technology, research, and the journey of learning. Latest articles will be in HackMD.
