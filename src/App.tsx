@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -91,6 +92,7 @@ function App() {
       <>
         <BlogPost post={selectedPost} onBack={handleBackToHome} />
         <Analytics />
+        <SpeedInsights />
       </>
     )
   }
@@ -108,6 +110,7 @@ function App() {
       <Footer />
       <AdminPanel />
       <Analytics />
+      <SpeedInsights />
     </div>
   )
 }
