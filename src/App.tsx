@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -86,7 +87,12 @@ function App() {
   }
 
   if (currentView === 'blogPost' && selectedPost) {
-    return <BlogPost post={selectedPost} onBack={handleBackToHome} />
+    return (
+      <>
+        <BlogPost post={selectedPost} onBack={handleBackToHome} />
+        <Analytics />
+      </>
+    )
   }
 
   return (
@@ -101,6 +107,7 @@ function App() {
       </main>
       <Footer />
       <AdminPanel />
+      <Analytics />
     </div>
   )
 }
