@@ -122,7 +122,7 @@ const Blog = ({ onViewPost }: BlogProps) => {
             Latest <span className="gradient-text">Thoughts</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Sharing insights on technology, research, and the journey of learning.
+            Sharing insights on technology, research, and the journey of learning. Latest articles will be in HackMD.
           </p>
         </div>
 
