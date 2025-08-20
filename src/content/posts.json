@@ -13,18 +13,6 @@
   },
   {
     "id": 2,
-    "title": "探討特徵提取與匹配",
-    "slug": "feature-extraction-and-matching",
-    "filename": "探討特徵提取與匹配.md",
-    "excerpt": "特徵提取與匹配在二維電腦視覺和三維電腦視覺的廣泛應用，從影像拼接到三維重建。",
-    "date": "2025-08-18T12:00:00Z",
-    "category": "Computer Vision",
-    "readTime": "12 min read",
-    "published": true,
-    "author": "Yu-Sheng Tzou"
-  },
-  {
-    "id": 3,
     "title": "Linux Kernel Suspend/Resume 理論與實驗",
     "slug": "linux-kernel-suspend-resume",
     "filename": "Linux Kernel Suspend_Resume 理論與實驗.md",
@@ -32,6 +20,18 @@
     "date": "2025-08-18T12:00:00Z",
     "category": "Operating Systems",
     "readTime": "25 min read",
+    "published": true,
+    "author": "Yu-Sheng Tzou"
+  },
+  {
+    "id": 3,
+    "title": "三維模型重建理論與實驗",
+    "slug": "3d-model-reconstruction",
+    "filename": "三維模型重建理論與實驗.md",
+    "excerpt": "探討三維模型重建在影像與視覺計算領域的理論基礎與技術發展，涵蓋多個學科並應用於自動駕駛、機器人等領域。",
+    "date": "2025-08-21T12:00:00Z",
+    "category": "Computer Vision",
+    "readTime": "8 min read",
     "published": true,
     "author": "Yu-Sheng Tzou"
   }
