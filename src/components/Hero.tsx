@@ -4,9 +4,10 @@ import { FaGithub, FaLinkedin } from 'react-icons/fa'
 
 const Hero = () => {
   const socialLinks = [
-    { href: 'mailto:daniel.tzou1021@gmail.com', icon: HiMail, label: 'Email' },
-    { href: 'https://github.com/yushengtzou/', icon: FaGithub, label: 'GitHub' },
-    { href: 'https://www.linkedin.com/in/yushengtzou/', icon: FaLinkedin, label: 'LinkedIn' }
+    { href: 'mailto:daniel.tzou1021@gmail.com', icon: HiMail, label: 'Email', color: 'text-blue-600' },
+    { href: 'https://github.com/yushengtzou/', icon: FaGithub, label: 'GitHub', color: 'text-gray-800' },
+    { href: 'https://www.linkedin.com/in/yushengtzou/', icon: FaLinkedin, label: 'LinkedIn', color: 'text-blue-700' },
+    { href: 'https://hackmd.io/@danieltzou', icon: '/images/hackmd.png', label: 'HackMD', isImage: true }
   ]
 
   return (
@@ -51,7 +52,6 @@ const Hero = () => {
           {/* Social Links */}
           <div className="flex justify-center space-x-6 mb-12">
             {socialLinks.map((link) => {
-              const IconComponent = link.icon
               return (
                 <a
                   key={link.href}
@@ -61,8 +61,16 @@ const Hero = () => {
                   className="p-3 rounded-full bg-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 group"
                   aria-label={link.label}
                 >
-                  <span className="text-2xl group-hover:scale-110 transition-transform inline-block">
-                    <IconComponent />
+                  <span className={`text-2xl group-hover:scale-110 transition-transform inline-block ${link.color || 'text-gray-700'}`}>
+                    {link.isImage ? (
+                      <img 
+                        src={link.icon} 
+                        alt={link.label} 
+                        className="w-6 h-6 object-contain"
+                      />
+                    ) : (
+                      <link.icon />
+                    )}
                   </span>
                 </a>
               )
