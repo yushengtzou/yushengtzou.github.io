@@ -11,7 +11,7 @@ const Experience = () => {
           achievements: [
             'Quantified and compared the estimated camera pose quality of SfM/MVS Meshroom pipeline and VGGSfM (Visual Geometry Grounded Deep SfM) on CO3D dataset.',
             'Implemented a robust Java Spring Boot backend to orchestrate Python AI/3D modules, ensuring reliable data processing.',
-            'Delivered a high-performance React/Three.js interface, achieving smooth 60 FPS manipulation of large-scale models through performance profiling using Perfetto.'
+            'Delivered a high-performance React/Three.js interface, achieving smooth 60 FPS manipulation of 3D models through performance profiling using Perfetto.'
           ],
           technologies: ['Python', 'Pytorch', 'Three.js',  'Perfetto', 'Java', 'Spring Boot', 'React',  'Meshroom',],
           type: 'current'
