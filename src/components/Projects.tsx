@@ -16,7 +16,7 @@ const Projects = () => {
     {
       title: '一個初學者在 Linux 核心系統休眠與回復的踩坑紀錄：基於 x86-64 之效能瓶頸分析與改進評估',
       description: 'An open source project talk in COSCUP 2025 about the performance bottleneck of Linux kernel power management module suspend and resume on x86-64.',
-      image: '/images/coscup25.png',
+      image: '/images/perf.png',
       technologies: ['Linux', 'x86-64', 'Performance Analysis', 'System Call'],
       status: 'Completed',
       year: '2025',
