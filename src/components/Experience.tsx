@@ -9,11 +9,11 @@ const Experience = () => {
           period: '2025.6 - Present',
           description: '3D Face Model Aesthetic Platform',
           achievements: [
-            'Architected the foundational system for the 3D face reconstruction algorithm, defining data flows, task partitioning, and system interoperability.',
+            'Quantified and compared the estimated camera pose quality of SfM/MVS Meshroom pipeline and VGGSfM (Visual Geometry Grounded Deep SfM) on CO3D dataset.',
             'Implemented a robust Java Spring Boot backend to orchestrate Python AI/3D modules, ensuring reliable data processing.',
-            'Delivered a high-performance React/Three.js interface, achieving smooth 60fps manipulation of large-scale models through targeted performance profiling.'
+            'Delivered a high-performance React/Three.js interface, achieving smooth 60 FPS manipulation of large-scale models through performance profiling using Perfetto.'
           ],
-          technologies: ['Java', 'Spring Boot', 'Python', 'React', 'Three.js', 'Algorithm Development'],
+          technologies: ['Python', 'Pytorch', 'Three.js',  'Perfetto', 'Java', 'Spring Boot', 'React',  'Meshroom',],
           type: 'current'
         },
         {
@@ -23,7 +23,6 @@ const Experience = () => {
           achievements: [
             'Designed and implemented a solution for cheek thread-lifting pre-operative 3D simulation and visualization techniques within a self-developed full stack web app for medical aesthetics consultation process.',
             'Enabled real-time 3D face cheek thread-lifting simulation and visualization.',
-            'Developed comprehensive web application infrastructure for medical consultation workflow.'
           ],
           technologies: ['3D Face Model', 'Mesh Deformation', 'Visualization'],
           type: 'previous'
@@ -94,8 +93,8 @@ const Experience = () => {
                         <h5 className="font-semibold text-gray-800 mb-3">Achievements:</h5>
                         <ul className="space-y-2">
                           {position.achievements.map((achievement, achIndex) => (
-                            <li key={achIndex} className="flex items-start">
-                              <span className="text-primary-600 mr-3 mt-1">▸</span>
+                            <li key={achIndex} className="flex">
+                              <span className="text-primary-600 mr-3 mt-0">▸</span>
                               <span className="text-gray-700 leading-relaxed">{achievement}</span>
                             </li>
                           ))}
