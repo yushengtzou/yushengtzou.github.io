@@ -148,15 +148,15 @@ const Blog = ({ onViewPost }: BlogProps) => {
         {/* Blog Posts Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {filteredPosts.map((post) => (
-            <article key={post.id} className="animate-on-scroll group">
-              <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden card-hover h-full">
+            <article key={post.id} className="animate-on-scroll">
+              <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden h-full">
                 {/* Featured Image */}
                 {post.image && (
                   <div className="h-48 bg-gradient-to-br from-primary-100 to-blue-100 overflow-hidden">
                     <img
                       src={post.image}
                       alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover"
                     />
                   </div>
                 )}
@@ -170,7 +170,10 @@ const Blog = ({ onViewPost }: BlogProps) => {
                     <span className="text-gray-500 text-sm">{post.readTime}</span>
                   </div>
                   
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors line-clamp-2">
+                  <h3 
+                    className="text-xl font-bold text-gray-900 mb-3 cursor-pointer hover:text-primary-600 transition-colors line-clamp-2"
+                    onClick={() => handlePostClick(post)}
+                  >
                     {post.title}
                   </h3>
                 </div>
@@ -185,10 +188,10 @@ const Blog = ({ onViewPost }: BlogProps) => {
                     
                     <button
                       onClick={() => handlePostClick(post)}
-                      className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors group"
+                      className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors"
                     >
                       Read More
-                      <span className="ml-1 group-hover:translate-x-1 transition-transform">→</span>
+                      <span className="ml-1">→</span>
                     </button>
                   </div>
                 </div>
