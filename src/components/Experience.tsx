@@ -9,14 +9,11 @@ const Experience = () => {
           period: '2025.6 - Present',
           description: '3D BeautyAI system | Lead Developer',
           achievements: [
-            'Spearheaded the complete, end-to-end development of a novel system for 3D facial aesthetic analysis, encompassing hardware design, core algorithm architecture, and a full-stack web application.',
             'Architected the foundational system for the 3D face reconstruction algorithm, defining data flows, task partitioning, and system interoperability.',
-            'Developed a dedicated simulator for comprehensive algorithm validation and performance evaluation.',
-            'Engineered a multi-view IoT imaging system using Simulink for modeling and deploying motor control algorithms, automating the data acquisition pipeline.',
             'Implemented a robust Java Spring Boot backend to orchestrate Python AI/3D modules, ensuring reliable data processing.',
             'Delivered a high-performance React/Three.js interface, achieving smooth 60fps manipulation of large-scale models through targeted performance profiling.'
           ],
-          technologies: ['Java', 'Spring Boot', 'Python', 'React', 'Three.js', 'Simulink', 'IoT', 'Algorithm Development'],
+          technologies: ['Java', 'Spring Boot', 'Python', 'React', 'Three.js', 'Algorithm Development'],
           type: 'current'
         },
         {
@@ -28,7 +25,7 @@ const Experience = () => {
             'Enabled real-time 3D face cheek thread-lifting simulation and visualization.',
             'Developed comprehensive web application infrastructure for medical consultation workflow.'
           ],
-          technologies: ['3D Simulation', 'Web Development', 'Medical Technology', 'Visualization'],
+          technologies: ['3D Face Model', 'Mesh Deformation', 'Visualization'],
           type: 'previous'
         }
       ],
