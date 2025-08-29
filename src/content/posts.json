@@ -13,18 +13,6 @@
   },
   {
     "id": 2,
-    "title": "Linux Kernel Suspend/Resume 理論與實驗",
-    "slug": "linux-kernel-suspend-resume",
-    "filename": "Linux Kernel Suspend_Resume 理論與實驗.md",
-    "excerpt": "深入分析Linux核心的暫停與恢復機制，包含理論基礎與實際實驗驗證。",
-    "date": "2025-08-18T12:00:00Z",
-    "category": "Operating Systems",
-    "readTime": "25 min read",
-    "published": true,
-    "author": "Yu-Sheng Tzou"
-  },
-  {
-    "id": 3,
     "title": "三維模型重建理論與實驗",
     "slug": "3d-model-reconstruction",
     "filename": "三維模型重建理論與實驗.md",

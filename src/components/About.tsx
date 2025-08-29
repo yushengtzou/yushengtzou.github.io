@@ -1,9 +1,9 @@
 const About = () => {
   const skills = [
     { category: 'Programming', items: ['C/C++', 'Python', 'JavaScript', 'TypeScript', 'Java'] },
-    { category: 'AI/ML', items: ['Computer Vision', 'Deep Learning', 'PyTorch', 'Algorithm Development', '3D Reconstruction'] },
-    { category: 'Hardware/IoT', items: ['ESP32 Microcontrollers', 'Simulink', 'Motor Control', 'IoT Systems', 'Multi-view Imaging'] },
-    { category: 'Web Development', items: ['React', 'Three.js', 'Node.js', 'Full-Stack Development', 'Spring Boot', 'Performance Optimization'] },
+    { category: 'AI/ML', items: ['3D Computer Vision', 'Deep Learning', 'PyTorch', 'Algorithm Development'] },
+    { category: 'Hardware/IoT', items: ['Arduino Uno', 'Multi-view Imaging'] },
+    { category: 'Web Development', items: ['React', 'Three.js', 'Spring Boot', 'Performance Optimization'] },
   ]
 
   const education = [
@@ -29,7 +29,6 @@ const About = () => {
             About <span className="gradient-text">Me</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Software Engineer specializing in AI innovation and 3D computer vision.
           </p>
         </div>
 
@@ -43,18 +42,7 @@ const About = () => {
             <div className="prose prose-lg text-gray-600 space-y-4">
               <p>
                 Currently serving as a Software Engineer in the AI Innovation Team at A-TOP Health Biotech Ltd., 
-                where I lead the development of cutting-edge 3D facial aesthetic analysis systems. My work spans 
-                the entire technology stack, from hardware design to full-stack web applications.
-              </p>
-              <p>
-                As the Lead Developer for the 3D BeautyAI system, I spearhead 
-                end-to-end development of novel systems for 3D facial aesthetic analysis. This includes architecting 
-                foundational algorithms, developing IoT imaging systems, and delivering high-performance web platforms 
-                with React/Three.js achieving smooth 60 FPS manipulation of large-scale 3D models.
-              </p>
-              <p>
-                My expertise bridges multiple domains: from Java Spring Boot backends orchestrating Python AI modules, 
-                to ESP32 microcontroller programming for IoT systems.
+                where I lead the development of cutting-edge 3D facial aesthetic analysis systems.
               </p>
             </div>
           </div>

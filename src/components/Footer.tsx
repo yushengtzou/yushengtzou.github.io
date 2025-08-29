@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto container-padding py-8">
         <div className="text-center">
           <p className="text-sm">
-            © {currentYear} Yu-Sheng Tzou. All rights reserved.
+            © {currentYear} Yu-Sheng Tzou
           </p>
         </div>
       </div>

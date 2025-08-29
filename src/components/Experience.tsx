@@ -7,7 +7,7 @@ const Experience = () => {
         {
           title: 'Software Engineer, AI Innovation Team',
           period: '2025.6 - Present',
-          description: '3D BeautyAI system | Lead Developer',
+          description: '3D Face Model Aesthetic Platform',
           achievements: [
             'Architected the foundational system for the 3D face reconstruction algorithm, defining data flows, task partitioning, and system interoperability.',
             'Implemented a robust Java Spring Boot backend to orchestrate Python AI/3D modules, ensuring reliable data processing.',
@@ -19,7 +19,7 @@ const Experience = () => {
         {
           title: 'Project Intern, AI Innovation Team',
           period: '2024.4 - 2025.6',
-          description: 'Medical Aesthetics 3D Simulation System',
+          description: '3D Aesthetic Procedures Simulation System',
           achievements: [
             'Designed and implemented a solution for cheek thread-lifting pre-operative 3D simulation and visualization techniques within a self-developed full stack web app for medical aesthetics consultation process.',
             'Enabled real-time 3D face cheek thread-lifting simulation and visualization.',
@@ -39,12 +39,10 @@ const Experience = () => {
       <div className="max-w-7xl mx-auto container-padding">
         <div className="animate-on-scroll text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-            Professional <span className="gradient-text">Experience</span>
+            <span className="gradient-text">Experience</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Leading innovation in AI-driven medical technology solutions with expertise spanning 
-            full-stack development, algorithm design, and IoT systems.
-          </p>
+          {/* <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          </p> */}
         </div>
 
         {/* Work Experience */}
@@ -93,7 +91,7 @@ const Experience = () => {
 
                       {/* Achievements */}
                       <div className="mb-6">
-                        <h5 className="font-semibold text-gray-800 mb-3">Key Achievements:</h5>
+                        <h5 className="font-semibold text-gray-800 mb-3">Achievements:</h5>
                         <ul className="space-y-2">
                           {position.achievements.map((achievement, achIndex) => (
                             <li key={achIndex} className="flex items-start">
